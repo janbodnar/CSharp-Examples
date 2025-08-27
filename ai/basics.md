@@ -164,6 +164,45 @@ var result = await kernel.InvokePromptAsync("Is Pluto a planet?", arguments);
 Console.WriteLine(result);
 ```
 
-The `MaxTokens` setting limits response length (useful for concise answers), while `Temperature` controls randomness - lower values (0.1-0.3) give more focused responses, higher values (0.7-1.0) produce more creative and varied outputs.
+The `MaxTokens` setting limits response length (useful for concise answers), while `Temperature`  
+controls randomness - lower values (0.1-0.3) give more focused responses, higher values (0.7-1.0)  
+produce more creative and varied outputs.
 
+## Multi-turn conversation
+
+```c#
+using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.ChatCompletion;
+
+var builder = Kernel.CreateBuilder();
+builder.AddOpenAIChatCompletion(
+    modelId: "z-ai/glm-4.5-air:free",
+    apiKey: Environment.GetEnvironmentVariable("OPENROUTER_API_KEY"),
+    endpoint: new Uri("https://openrouter.ai/api/v1")
+);
+
+var kernel = builder.Build();
+var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
+
+// Initialize messages for multi-turn conversation
+var chatHistory = new ChatHistory();
+chatHistory.AddUserMessage("What is the capital of France? Answer in one sentence.");
+
+// First turn: Ask about France
+var completion = await chatCompletionService.GetChatMessageContentAsync(chatHistory);
+
+// Get and store the response
+var franceResponse = completion.Content ?? "No response";
+chatHistory.AddAssistantMessage(franceResponse);
+
+Console.WriteLine("First question response: " + franceResponse);
+
+// Second turn: Ask about Slovakia
+chatHistory.AddUserMessage("And of Slovakia?");
+
+completion = await chatCompletionService.GetChatMessageContentAsync(chatHistory);
+
+// Print the final response
+Console.WriteLine("Second question response: " + (completion.Content ?? "No response"));
+```
 
