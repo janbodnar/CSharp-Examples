@@ -3,7 +3,7 @@
 
 ## Simple 
 
-```csharp
+```c#
 from openai import OpenAI
 import os
 
