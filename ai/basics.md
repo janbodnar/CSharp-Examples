@@ -98,6 +98,43 @@ if (result.Metadata != null && result.Metadata.TryGetValue("Usage", out var usag
 
 The output shows the breakdown of tokens used: input tokens (your prompt), output tokens (AI's response), and total tokens. This information helps you understand and optimize your API costs.
 
+## Streaming 
+
+```c#
+using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.ChatCompletion;
+
+var builder = Kernel.CreateBuilder();
+builder.AddOpenAIChatCompletion(
+    modelId: "x-ai/grok-code-fast-1",
+    apiKey: Environment.GetEnvironmentVariable("OPENROUTER_API_KEY"),
+    endpoint: new Uri("https://openrouter.ai/api/v1")
+);
+
+var kernel = builder.Build();
+var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
+
+// Create chat history with user message
+var chatHistory = new ChatHistory();
+chatHistory.AddUserMessage("Is Pluto a planet?");
+
+// Enable streaming in the completion request
+Console.Write("Streaming response:");
+await foreach (var chunk in chatCompletionService.GetStreamingChatMessageContentsAsync(chatHistory))
+{
+    // Check if the chunk contains content
+    if (!string.IsNullOrEmpty(chunk.Content))
+    {
+        // Print the content chunk without a newline
+        Console.Write(chunk.Content);
+    }
+}
+
+// Add a final newline for clean formatting
+Console.WriteLine();
+```
+
+
 ## Simple text completions
 
 This example shows how to configure completion settings to fine-tune the AI's responses. By adjusting parameters like maximum tokens and temperature, you can control the length and creativity of the generated text.
