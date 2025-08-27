@@ -4,23 +4,18 @@
 ## Simple 
 
 ```c#
-from openai import OpenAI
-import os
+using Microsoft.SemanticKernel;
 
-# Client initialization with OpenRouter API
-client = OpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key=os.environ.get("OPENROUTER_API_KEY"),
-)
 
-# First API call
-completion = client.chat.completions.create(
-    extra_body={},  # OpenRouter specific parameters
-    model="anthropic/claude-3-haiku",  # Model from Anthropic via OpenRouter
-    messages=[
-        {"role": "user", "content": "Is Pluto a planet?"}
-    ]
-)
+var builder = Kernel.CreateBuilder();
 
-print(completion.choices[0].message.content)
+builder.AddOpenAIChatCompletion(
+    modelId: "anthropic/claude-3-haiku",
+    apiKey: Environment.GetEnvironmentVariable("OPENROUTER_API_KEY"),
+    endpoint: new Uri("https://openrouter.ai/api/v1")
+);
+
+var kernel = builder.Build();
+var result = await kernel.InvokePromptAsync("Is Pluto a planet?");
+Console.WriteLine(result);
 ```
