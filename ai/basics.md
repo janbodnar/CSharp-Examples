@@ -22,7 +22,7 @@ Console.WriteLine(result);
 
 ## DeepSeek example
 
-```C#
+```c#
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 
@@ -47,7 +47,7 @@ Console.WriteLine(result.Content);
 
 ## Token usage
 
-```C#
+```c#
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using OpenAI.Chat;
@@ -86,5 +86,31 @@ if (result.Metadata != null && result.Metadata.TryGetValue("Usage", out var usag
 }
 ```
 
+## Simple text completions
+
+```c#
+using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.Connectors.OpenAI;
+
+
+var builder = Kernel.CreateBuilder();
+builder.AddOpenAIChatCompletion(
+    modelId: "z-ai/glm-4.5-air:free",
+    apiKey: Environment.GetEnvironmentVariable("OPENROUTER_API_KEY"),
+    endpoint: new Uri("https://openrouter.ai/api/v1")
+);
+
+var kernel = builder.Build();
+
+var settings = new OpenAIPromptExecutionSettings
+{
+    MaxTokens = 150,
+    Temperature = 0.7f
+};
+
+var arguments = new KernelArguments(settings);
+var result = await kernel.InvokePromptAsync("Is Pluto a planet?", arguments);
+Console.WriteLine(result);
+```
 
 
