@@ -109,6 +109,12 @@ and total tokens. This information helps you understand and optimize your API co
 
 ## Streaming 
 
+This example demonstrates how to stream the AI's response in real time as it is generated, rather than  
+waiting for the entire response to complete. Streaming is useful for improving user experience in chatbots  
+or interactive applications, as it provides immediate feedback and makes long responses feel  
+faster and more engaging.
+
+
 ```c#
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
