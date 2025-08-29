@@ -219,6 +219,9 @@ Console.WriteLine("Second question response: " + (completion.Content ?? "No resp
 
 ## Function call 
 
+This C# example demonstrates an AI-powered translation tool using Semantic Kernel  
+and the DeepSeek API. 
+
 ```c#
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
@@ -317,4 +320,10 @@ public class Program
     }
 }
 ```
+
+The code example registers a `get_random_language` function that selects from a predefined list of languages,  
+then uses tool calling with auto-invocation to pick a random language and translate "Hello, how are you?" into it.  
+The program handles two API turns: first to invoke the language selection tool, then to perform the translation,  
+with a fallback for manual function execution if needed. It includes reusable randomness, API key validation, and  
+low temperature settings for consistent behavior.
 
