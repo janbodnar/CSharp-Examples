@@ -26,12 +26,16 @@ else
 }
 ```
 
-## even/odd  
+## even/odd numbers
 
 ```csharp
 // Lambda functions for odd/even
 Func<int, bool> isOdd = i => (i & 1) == 1;
 Func<int, bool> isEven = i => !isOdd(i);
+
+Console.WriteLine(isOdd(3));  // True
+Console.WriteLine(isEven(3)); // False
+
 
 // Filter even values using LINQ
 var evens = new[] {1, 2, 3, 4, 5}.Where(it => it % 2 == 0).ToArray();
