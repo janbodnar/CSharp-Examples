@@ -1,13 +1,8 @@
 # CSharp-Examples
+
 C# Examples
 
-# Groovy-Examples
-Groovy code examples
 
-`println System.getProperty("user.dir")` print current working directory  
-`println "ls -la".execute().text` execute shell command  
-
-C# equivalents:
 ```csharp
 Console.WriteLine(Environment.CurrentDirectory); // print current working directory
 
@@ -21,15 +16,8 @@ result.WaitForExit();
 Console.WriteLine(result.StandardOutput.ReadToEnd());
 ```
 
-```groovy
-def isOdd = { int i -> (i & 1) as boolean }
-def isEven = {int i -> ! isOdd(i) }
-```
-even/odd  
+## even/odd  
 
-`def evens = [1, 2, 3, 4, 5].findAll{ it % 2 == 0 }` - filter out even values  
-
-C# equivalents:
 ```csharp
 // Lambda functions for odd/even
 Func<int, bool> isOdd = i => (i & 1) == 1;
@@ -40,36 +28,8 @@ var evens = new[] {1, 2, 3, 4, 5}.Where(it => it % 2 == 0).ToArray();
 Console.WriteLine($"[{string.Join(", ", evens)}]"); // [2, 4]
 ```  
 
-## Debug macros (Groovy-specific - skipped)
 
-```groovy
-def name = 'John Doe'
-def vals = [1, 2, 3, -4, 5]
-def words = ['game', 'cup', 'water'] as String[]
-def r = 1..10
-
-println SV(name, vals, words, r)
-println SVI(name, vals, words, r)
-
-println NV(r)
-println NVL(r)
-```
-
-*Note: Debug macros like SV(), SVI(), NV(), NVL() are Groovy-specific and don't have direct C# equivalents. In C# debugging, you would typically use debugger tools, Console.WriteLine, or logging frameworks like Serilog or NLog.*
-
-## Executable JARs in Gradle 
-
-```groovy
-jar {
-  manifest {
-    attributes(
-      'Main-Class': 'com.zetcode.Application'
-    )
-  }
-}
-```
-
-C# equivalent - Creating executable applications with dotnet:
+## Creating executable applications with dotnet:
 
 ```xml
 <!-- In .csproj file -->
@@ -92,19 +52,9 @@ dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=
 dotnet publish -c Release -r linux-x64 --self-contained true /p:PublishSingleFile=true
 ```
 
-## def keyword
+## var keyword
 
-With `def` variables act like they are of type Object, so they can be reassigned to different types.  
-
-```groovy
-def x = 12
-println x.getClass().getName()
-
-x = 'falcon'
-println x.getClass().getName()
-```
-
-C# equivalent using `var` for type inference and `object` for dynamic typing:
+Using `var` for type inference and `object` for dynamic typing:
 
 ```csharp
 // Using var - type is inferred at compile time and cannot be reassigned to different types
@@ -121,15 +71,6 @@ Console.WriteLine(y.GetType().Name); // String
 
 ## System properties
 
-```groovy
-println System.getProperty("java.vendor")
-println System.getProperty("os.arch")
-println System.getProperty("os.name")
-println System.getProperty("java.class.version")
-println System.getProperty("java.class.path")
-
-println System.currentTimeMillis()
-```
 
 C# equivalent using Environment class:
 
@@ -145,18 +86,7 @@ Console.WriteLine(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()); // Current ti
 
 ## Environment variables 
 
-```groovy
-println System.getenv("JAVA_HOME")
-println System.getenv("GROOVY_HOME")
-println System.getenv("PATH")
-
-println '------------------------'
-
-def env = System.getenv().collect { k, v -> "$k=$v" }
-env.each { e -> println e }
-```
-
-C# equivalent using Environment class:
+Using `Environment` class:
 
 ```csharp
 Console.WriteLine(Environment.GetEnvironmentVariable("DOTNET_ROOT"));
@@ -177,32 +107,7 @@ foreach (var e in env)
 
 ## Multiple assignments
 
-```groovy
-def (name1, name2, name3) = ['John Doe', 'Roger Roe', 'Lucia Smith']
-println name1 
-println name2
-println name3
-```
-
-Using typed variables on the left side.  
-
-```groovy
-def (int x, int y , String w) = [10, 20, 'falcon']
-
-println x
-println y
-println w
-```
-
-The `_` discard operator  
-
-```groovy
-def (_, month, year) = "3rd August 2023".split()
-println month
-println year
-```
-
-C# equivalent using tuple deconstruction:
+Using tuple deconstruction:
 
 ```csharp
 // Basic tuple deconstruction
@@ -225,19 +130,7 @@ Console.WriteLine(year);
 ```
 
 
-## Primitive types are auto-wrapped
-
-```groovy
-int n = 3
-println n.getClass().getName()
-println n.getClass().isPrimitive()
-
-float m = 4.4;
-println m.getClass().getName()
-println m.getClass().isPrimitive()
-```
-
-C# equivalent demonstrating boxing and value types:
+## Boxing and value types:
 
 ```csharp
 int n = 3;
@@ -254,42 +147,7 @@ Console.WriteLine(boxedInt.GetType().Name); // Int32
 Console.WriteLine(boxedInt.GetType().IsValueType); // True (type info preserved)
 ```
 
-## Import Groovy code in script (Groovy-specific - skipped)
-
-```groovy
-package com.zetcode 
-
-// User.groovy
-record User(String name) {}
-```
-
-```groovy
-package com.zetcode
-
-// main.groovy
-this.class.classLoader.parseClass("User.groovy")
-
-def u = new User('John Doe')
-println u
-```
-
-Run the app `$ groovy com\zetcode\main.groovy`  
-
-*Note: This is specific to Groovy's dynamic class loading. In C#, you would use assemblies, namespaces, and standard project references or dynamic compilation with Roslyn if needed.*  
-
-## Steps
-
-```groovy
-1.step(4, 0.5) { print "$it "}
-println "\n-----------------------"
-
-1.step(10, 1) { 
-    
-    println it
-}
-```
-
-C# equivalent using custom step methods:
+## Steps 
 
 ```csharp
 // Extension method for step functionality
@@ -330,17 +188,6 @@ foreach (var value in stepSequence)
 
 ## Pick random element from list
 
-```groovy
-def words = ["sky", "cup", "tall", "falcon", "cloud"]
-
-def rnd = new Random()
-
-def ri = rnd.nextInt(words.size())
-println words[ri]
-```
-
-C# equivalent:
-
 ```csharp
 var words = new[] {"sky", "cup", "tall", "falcon", "cloud"};
 
@@ -355,27 +202,10 @@ Console.WriteLine(randomWord);
 ```
 
 
-## Unix pipes (Groovy-specific - skipped)
-
-```groovy
-def p = 'ls -l'.execute()  | ['awk', '{ print $1, $NF }'].execute()
-p.waitFor()
-println p.text
-```
-
-*Note: Groovy's native pipe operator for processes doesn't have a direct C# equivalent. In C#, you would need to use ProcessStartInfo with RedirectStandardOutput/Input to chain processes manually.*
-
 ## Download image
 
-```groovy
-import java.nio.file.Files
-import java.nio.file.Paths
 
-def data = "http://webcode.me/favicon.ico".toURL().bytes
-Files.write(Paths.get('favicon.ico'), data)
-```
-
-C# equivalent using HttpClient:
+Using HttpClient:
 
 ```csharp
 using var httpClient = new HttpClient();
@@ -389,26 +219,7 @@ File.WriteAllBytes("favicon.ico", dataSync);
 
 ## Iterate runes
 
-```groovy
-import java.text.BreakIterator
-
-def text = "🐜🐬🐄🐘🦂🐫🐑🦍🐯🐞"
-
-def it = BreakIterator.getCharacterInstance()
-it.setText(text)
-
-def start = it.first()
-def end = it.next()
-
-while (start < end) { 
-
-    println(text.substring(start, end))
-    start = end 
-    end = it.next()
-}
-```
-
-C# equivalent using StringInfo or direct string enumeration:
+C# equivalent using `StringInfo` or direct string enumeration:
 
 ```csharp
 using System.Globalization;
@@ -438,20 +249,8 @@ foreach (var rune in text.EnumerateRunes())
 
 ## Create a deck of cards
 
-```groovy
-def signs = (2..10) + ['J', 'Q', 'K', 'A']
-def symbols = ['♣', '♦', '♥', '♠']
- 
-// [♣2, ♦2, ♥2, ♠2, ..., ♣A, ♦A, ♥A, ♠A]
-def cards = [symbols, signs].combinations().collect { it.join() }
-println cards
 
-cards.shuffle()
-
-println cards.take(5)
-```
-
-C# equivalent using LINQ for combinations:
+Using LINQ for combinations:
 
 ```csharp
 var signs = Enumerable.Range(2, 9).Select(n => n.ToString())
@@ -491,44 +290,7 @@ Console.WriteLine($"Shuffled: [{string.Join(", ", deckCopy.Take(5))}]");
 
 ## Shuffle emoji cards
 
-```groovy
-
-def cards = [
-    "🂡", "🂱", "🃁", "🃑",
-    "🂢", "🂲", "🃂", "🃒",
-    "🂣", "🂳", "🃃", "🃓",
-    "🂤", "🂴", "🃄", "🃔",
-    "🂥", "🂵", "🃅", "🃕",
-    "🂦", "🂶", "🃆", "🃖",
-    "🂧", "🂷", "🃇", "🃗",
-    "🂨", "🂸", "🂸", "🂸",
-    "🂩", "🂩", "🃉", "🃙",
-    "🂪", "🂺", "🃊", "🃚",
-    "🂫", "🂻", "🃋", "🃛",
-    "🂭", "🂽", "🃍", "🃝",
-    "🂮", "🂾", "🃎", "🃞"
-]
-
-def show(cards) {
-
-    cards.eachWithIndex { e, i -> 
-
-        if (i != 0 && i % 13 == 0) {
-            print "\n"
-        }
-
-        print "${e} "
-    }
-
-    print "\n"
-}
-
-
-cards.shuffle()
-show(cards)
-```
-
-C# equivalent with emoji cards and display function:
+Emoji cards and display function:
 
 ```csharp
 var cards = new[]
@@ -585,54 +347,7 @@ Show(cardsCopy);
 
 ## Ranges 
 
-```groovy
-import java.time.LocalDate
-import java.time.Month
-
-def vals = 1..10
-println vals.from
-println vals.to
-println vals.toList()
-
-// steps
-def vals2 = (1..7).step(2)
-println vals2
-
-// reverse range
-def vals3 = 10..1
-println vals3
-
-// exclusive ranges
-def vals4 = 1..<10
-println vals4.toList()
-
-def vals5 = 1<..<10
-println vals5.toList()
-
-def chars = 'a'..'z'
-println chars 
-println chars.size()
-println chars.contains('c')
-println chars.getFrom() 
-println chars.getTo()
-
-// date & time 
-def months = Month.JANUARY..Month.DECEMBER
-
-for (def m in months) {
-
-    println m
-}
-
-def days = LocalDate.now()..LocalDate.now().plusDays(17)
-
-for (def d in days) {
-    
-    println d
-}
-```
-
-C# equivalent using various range approaches:
+Using various range approaches:
 
 ```csharp
 // Basic range using Enumerable.Range
@@ -681,19 +396,8 @@ Console.WriteLine($"[{string.Join(", ", slice)}]");
 
 ## Method chaining
 
-Groovy has support for method chaining.  
 
-```groovy
-int[] vals = [1, 15, 16, 30, 12]
-
-def res = vals.grep(12..18).sum()
-println res
-
-res = vals.grep { it != 15 || it != 16 }.collect { it * it }.sum()
-println res
-```
-
-C# equivalent using LINQ method chaining:
+Using LINQ method chaining:
 
 ```csharp
 var vals = new[] {1, 15, 16, 30, 12};
@@ -707,57 +411,11 @@ res = vals.Where(x => x != 15 && x != 16).Select(x => x * x).Sum();
 Console.WriteLine(res); // 1045 (1² + 30² + 12² = 1 + 900 + 144)
 ```
 
-## Spaceship operator 
-
-```groovy
-def words = ['sky', 'water', 'emotion', 'shredder', 
-    'anonymous', 'on', 'a', 'copper', 'the', 'elephant']
-
-words.sort { e1, e2 -> e1.length() <=> e2.length() }
-println words
-
-words.sort { e1, e2 -> e2.length() <=> e1.length() }
-println words
-```
 
 
-```groovy
-class User implements Comparable {
+## Custom comparation
 
-    String fname
-    String lname
-    String occupation
-
-    User(String fname, String lname, String occupation) {
-        this.fname = fname;
-        this.lname = lname;
-        this.occupation = occupation;
-    }
-
-    int compareTo(o) {
-        this.lname <=> o.lname
-    }
-
-    String toString() {
-        "${this.fname} ${this.lname} - ${this.occupation}"
-    }
-}
-
-
-def users = [
-    new User('John', 'Doe', 'gardener'),
-    new User('Roger', 'Roe', 'driver'),
-    new User('Lucia', 'Smith', 'accountant'),
-    new User('Paul', 'Newman', 'firefighter'),
-    new User('Adam', 'Clapton', 'teacher'),
-    new User('Jane', 'Walter', 'pilot')
-]
-
-println users
-println users.sort()
-```
-
-C# equivalent using IComparable and custom comparers:
+Using `IComparable` and custom comparers:
 
 ```csharp
 var words = new[] {"sky", "water", "emotion", "shredder", 
@@ -818,32 +476,7 @@ foreach (var user in users.OrderBy(u => u))
 
 ## grepping/filtering  
 
-```groovy
-def res = [1, 15, 16, 30, 12].grep(12..18)
-println res
-
-def res2 = [1, 2, -1, 0, 2, 3, -3, 4].grep({it > 0})
-println res2
-
-def words = ['sky', 'cloud', 'war', 'wasp', 'water', 'coin']
-def res3 = words.grep(~/.../)
-println res3
-```
-
-Filter by class and list contains
-
-```groovy
-def data = [true, 'sky', 1.2, 0, 1..3, new BigDecimal(4), [1, 2, 3]]
-
-def res = data.grep(Number)
-println(res)
-
-def words = ['key', 'cup', 'cloud', 'storm', 'wood']
-res = words.grep(['cup', 'wood', 'car'])
-println res
-```
-
-C# equivalent using LINQ filtering:
+Using LINQ filtering:
 
 ```csharp
 // Filter values in range
@@ -871,16 +504,8 @@ var res5 = words2.Where(w => filter.Contains(w)).ToArray();
 Console.WriteLine($"[{string.Join(", ", res5)}]"); // [cup, wood]
 ```
 
-
-```groovy
-def gcd(a,b) {
-  if (!b) a
-  else gcd(b, a%b)
-}
-```
 Custom GCD with recursion
 
-C# equivalent:
 
 ```csharp
 static int Gcd(int a, int b)
@@ -893,29 +518,6 @@ Console.WriteLine(Gcd(48, 18)); // 6
 ```
 
 ## Filter lines
-
-```groovy
-def fname = 'words.txt'
-def f = new File(fname)
-
-// def res = f.filterLine { it =~ /^w.*/ }
-def res = f.filterLine { it =~ /^w.*/ }
-println res
-```
-
-## Methods must return def or type
-
-```groovy
-sum(x, y) {
-    x + y
-}
-
-println sum(1, 3)
-```
-
-This code fails.
-
-C# equivalent showing proper method declaration:
 
 ```csharp
 // C# requires explicit return types and parameter types
@@ -936,26 +538,8 @@ static T Sum<T>(T x, T y) where T : INumber<T>
 
 ## Process
 
-```groovy
-def process = "ls -l".execute()
 
-process.in.eachLine { line ->
-    println line
-}
-```
-Runs external program
-
-```groovy
-def c1 = "perl --version"
-def c2 = "perl -e 'system(\"echo Hello there!\")'"
-
-println c1.execute().text
-println "--------------------------------"
-println c2.execute().text
-```
-Runs Perl one liners  
-
-C# equivalent using Process class:
+Using `Process` class:
 
 ```csharp
 using System.Diagnostics;
@@ -1005,68 +589,8 @@ Console.WriteLine("--------------------------------");
 Console.WriteLine(RunCommand("echo", "Hello there!"));
 ```  
 
-## Grouping
+## Records
 
-```groovy
-import java.time.LocalDate
-import groovy.transform.Immutable
-
-@Immutable
-class User {
-    String name
-    String occupation
-    LocalDate dob
-}
- 
-def users = [
-
-    new User('John Doe', 'gardener', LocalDate.parse('1973-09-07', 'yyyy-MM-dd')),
-    new User('Roger Roe', 'driver', LocalDate.parse('1963-03-30', 'yyyy-MM-dd')),
-    new User('Kim Smith', 'teacher', LocalDate.parse('1980-05-12', 'yyyy-MM-dd')),
-    new User('Joe Nigel', 'artist', LocalDate.parse('1983-03-30', 'yyyy-MM-dd')),
-    new User('Liam Strong', 'teacher', LocalDate.parse('2009-03-06', 'yyyy-MM-dd')),
-    new User('Robert Young', 'gardener', LocalDate.parse('1978-11-16', 'yyyy-MM-dd')),
-    new User('Liam Strong', 'teacher', LocalDate.parse('1986-10-23', 'yyyy-MM-dd'))
-]
- 
-def res = users.groupBy({ it.occupation })
-
-for (e in res) {
-    println e
-}
-```
-
-Group data by occupation
-
-## Records 
-
-Groovy 4 introduced records  
-
-```groovy
-import java.time.LocalDate
-
-record User(String name, String occupation, LocalDate dob) { }
-
-def users = [
-
-    new User('John Doe', 'gardener', LocalDate.parse('1973-09-07', 'yyyy-MM-dd')),
-    new User('Roger Roe', 'driver', LocalDate.parse('1963-03-30', 'yyyy-MM-dd')),
-    new User('Kim Smith', 'teacher', LocalDate.parse('1980-05-12', 'yyyy-MM-dd')),
-    new User('Joe Nigel', 'artist', LocalDate.parse('1983-03-30', 'yyyy-MM-dd')),
-    new User('Liam Strong', 'teacher', LocalDate.parse('2009-03-06', 'yyyy-MM-dd')),
-    new User('Robert Young', 'gardener', LocalDate.parse('1978-11-16', 'yyyy-MM-dd')),
-    new User('Liam Strong', 'teacher', LocalDate.parse('1986-10-23', 'yyyy-MM-dd'))
-]
- 
-def res = users.groupBy({ it.occupation })
-
-for (e in res) {
-    
-    println e
-}
-```
-
-C# equivalent using records (C# 9+):
 
 ```csharp
 using System;
@@ -1099,28 +623,6 @@ foreach (var group in res)
 
 ## Find GCD from the max & min in a list 
 
-```groovy
-def vals = [8, 5, 10]
-
-def min = vals.min() as BigInteger
-def max = vals.max() as BigInteger
-
-println min.gcd(max)
-```
-Casting to BigInteger
-
-```groovy
-def vals = [8g, 5g, 10g]
-
-def min = vals.min()
-def max = vals.max()
-
-println min.gcd(max)
-```
-Using BigInteger literals
-
-C# equivalent using System.Numerics.BigInteger:
-
 ```csharp
 using System.Numerics;
 
@@ -1143,252 +645,9 @@ static int Gcd(int a, int b) => b == 0 ? a : Gcd(b, a % b);
 Console.WriteLine(Gcd(vals.Max(), vals.Min())); // 1
 ```
 
-## Read CSV file
+## Read file
 
-```groovy
-@Grab(group='com.opencsv', module='opencsv', version='5.5.2')
-
-import java.nio.file.Files
-import java.nio.file.Paths
-import com.opencsv.CSVParserBuilder
-import com.opencsv.CSVReaderBuilder
-
-def fname = 'src/resources/cars.csv'
-def br = Files.newBufferedReader(Paths.get(fname))
-
-def parser = new CSVParserBuilder().withSeparator(',' as char).build()
-def reader = new CSVReaderBuilder(br).withCSVParser(parser).build()
-
-def lines = reader.readAll()
-
-for (line in lines) {
-    println line.join(" ")
-}
-```
-reads CSV file with OpenCSV library
-
-## Convert CSV file to HTML table
-
-```groovy
-package com.zetcode
-
-@Grab(group='org.codehaus.groovy', module='groovy-xml', version='3.0.9')
-@Grab(group='com.opencsv', module='opencsv', version='5.5.2')
-
-import java.nio.file.Files
-import java.nio.file.Paths
-import com.opencsv.CSVParserBuilder
-import com.opencsv.CSVReaderBuilder
-import groovy.xml.MarkupBuilder
-
-def fname = 'cars.csv'
-def br = Files.newBufferedReader(Paths.get(fname))
-
-def parser = new CSVParserBuilder().withSeparator(',' as char).build()
-def reader = new CSVReaderBuilder(br).withCSVParser(parser).build()
-
-def lines = reader.readAll()
-
-def buildTable(rows, n) {
-    
-    def sw = new StringWriter()
-    
-    new MarkupBuilder(sw).table() {
-        thead {
-            tr {
-                rows[0].each { f -> th(f)}
-            }
-        } 
-        tbody {
-            (1..n).each { row ->
-                tr {
-                    rows[row].each { f -> td(f) }
-                }
-            }
-        }
-    }
-    
-    sw.toString()
-}
-
-println buildTable(lines.toList(), lines.size()-1)
-```
-
-## Parse XML
-
-```groovy
-import groovy.xml.XmlSlurper
-
-def data = '''<?xml version="1.0" encoding="utf-8"?>
-<products>
-    <product>
-        <id>1</id>
-        <name>Product A</name>
-        <price>780</price>
-    </product>
-
-    <product>
-        <id>2</id>
-        <name>Product B</name>
-        <price>1100</price>
-    </product>
-
-    <product>
-        <id>3</id>
-        <name>Product C</name>
-        <price>1050</price>
-    </product>
-
-    <product>
-        <id>4</id>
-        <name>Product D</name>
-        <price>950</price>
-    </product>
-</products>
-'''
-
-def products = new XmlSlurper().parseText(data)
-
-def id1 = products.product[0].id
-def name1 = products.product[0].name
-def price1 = products.product[0].price
-
-println "$id1 $name1 $price1"
-
-def names = products.'**'.findAll { node -> node.name() == 'name' }*.text()
-println names
-
-def prices = products.product.'*'.find { node ->
-
-    node.name() == 'price' && node.text() as Integer < 1000
-}
-
-print prices
-```
-
-
-## Iterate over lines of URL
-
-```groovy
-def url = new URL("http://www.webcode.me")
-
-url.eachLine { println it }
-```
-
-## Socket HEAD/GET request
-
-```groovy
-def s = new Socket("webcode.me", 80)
-
-s.withStreams { sin, sout ->
-  
-  sout << "HEAD / HTTP/1.1\r\nConnection: close\r\nHost: webcode.me\r\nAccept: text/html\r\n\r\n" 
-  
-  def reader = sin.newReader()
-  def lines = reader.readLines()
-  
-  for (line in lines) {
-      println line
-  }
-}
-```
-
-```groovy
-def host = "webcode.me"
-int port = 80
-
-def s = new Socket(host, port)
-
-s.setSoTimeout(18000)
-
-s.withStreams { sin, sout ->
-
-    sout << "GET / HTTP/1.1\r\n"
-    sout << "Connection: close\r\n"
-    sout << "Host: www.webcode.me\r\n\r\n"
-
-    def text = sin.text
-    println text
-}
-```
-
-## Web scraping with JSoup  
-
-```groovy
-@Grab(group='org.jsoup', module='jsoup', version='1.10.1')
-import org.jsoup.Jsoup
-
-def doc = Jsoup.connect("http://webcode.me").get()
-def title = doc.select('title')
-def elements = doc.select('*')
-
-println doc
-println title
-
-elements.each { e ->
-    println e
-}
-```
-
-## Files
-
-```groovy
-def f = new File("words.txt")
-
-f.eachLine { ln, n ->
-    println "line $n: $ln"
-}
-```
-Read file line by line
-
----
-
-```groovy
-def fname = 'src/resources/words.txt'
-def f = new File(fname)
-
-def res = f.filterLine { it =~ /^w.*/ }
-println res
-```
-filter lines; include only that start with 'w'
-
----
-
-```groovy
-def fname = 'words.txt'
-def f = new File(fname)
-
-println f.text 
-```
-read contents
-
----
-
-```groovy
-def fname = 'words.txt'
-def f = new File(fname)
-
-// def lines = f as String[]
-// println lines
-
-def lines = f.readLines()
-println lines
-```
-read lines into list
-
----
-
-```groovy
-def fname = 'words.txt'
-def f = new File(fname)
-
-f.withWriterAppend('utf-8') {
-	writer -> writer.append('falcon\n').append('owl')
-}
-```
-append to file  
-
-C# equivalent using File class methods:
+Using File class methods:
 
 ```csharp
 // Read file line by line
@@ -1421,425 +680,5 @@ Console.WriteLine($"[{string.Join(", ", allLines)}]");
 // Append to file
 File.AppendAllText("words.txt", "falcon\nowl\n");
 ```  
-
-## Undertow server 
-
-```groovy
-package com.zetcode
-
-@Grab(group='io.undertow', module='undertow-core', version='2.3.7.Final')
-
-import io.undertow.Undertow
-import io.undertow.util.Headers
-
-def server = Undertow.builder()
-        .addHttpListener(8080, "localhost")
-        .setHandler(exchange -> {
-            exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain")
-            exchange.getResponseSender().send("Hello there")
-        }).build()
-
-server.start()
-```
-
-## Working with H2 in-memory database
-
-```groovy
-@GrabConfig(systemClassLoader=true)
-@Grab(group='com.h2database', module='h2', version='1.4.200')
-
-import groovy.sql.Sql
-
-def createTable = '''
-CREATE TABLE cars(id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), price INT);
-INSERT INTO cars(name, price) VALUES('Audi', 52642);
-INSERT INTO cars(name, price) VALUES('Mercedes', 57127);
-INSERT INTO cars(name, price) VALUES('Skoda', 9000);
-INSERT INTO cars(name, price) VALUES('Volvo', 29000);
-INSERT INTO cars(name, price) VALUES('Bentley', 350000);
-INSERT INTO cars(name, price) VALUES('Citroen', 21000);
-INSERT INTO cars(name, price) VALUES('Hummer', 41400);
-INSERT INTO cars(name, price) VALUES('Volkswagen', 21600);
-'''
-
-def url = "jdbc:h2:mem:"
-def sql = Sql.withInstance(url) { sql ->
-
-    sql.execute("DROP TABLE IF EXISTS cars")
-    sql.execute(createTable)
-
-    def query = "SELECT * FROM cars"
-
-    sql.eachRow(query) { row ->
-      println "$row.id  ${row.name} $row.price"
-    }
-}
-```
-
-## Fetch all rows from db  
-
-```groovy
-@Grab(group='org.postgresql', module='postgresql', version='42.2.24')
-@GrabConfig(systemClassLoader=true)
-
-import groovy.sql.Sql
-
-def url = 'jdbc:postgresql://localhost:5432/testdb'
-def user = 'postgres'
-def password = ''
-def driver = 'org.postgresql.Driver'
-
-Sql.withInstance(url, user, password, driver) { sql ->
-
-    def res = sql.rows('SELECT * FROM cars')
-    println res
-}
-```
-
-## Find all text files  
-
-```groovy
-import static groovy.io.FileType.FILES
-
-def f = new File('/home/jano7/Documents')
-
-f.eachFileRecurse(FILES) {
-    if(it.name.endsWith('.txt')) {
-        println it
-    }
-}
-```
-
-```groovy
-import static groovy.io.FileType.FILES
-
-def f = new File('/home/jano7/Documents')
-
-f.traverse(type: FILES, nameFilter: ~/.*.txt/) { it ->
-	println it
-}
-```
-
-The *nameFilter* is an exact match   
-
-## Iterate over range of datetime values
-
-```groovy
-@Grab('org.codehaus.groovy:groovy-datetime:3.0.9')
-
-import java.time.Instant
-import java.time.temporal.ChronoUnit
-
-def now = Instant.now()
-println now
-
-def d2 = now.plus(3, ChronoUnit.DAYS)
-
-println "--------------"
-
-now.upto(d2, ChronoUnit.DAYS) {
-	
-	println it
-}
-```
-
-## SFTP list directory
-
-```groovy
-@Grab(group='com.hierynomus', module='sshj', version='0.35.0')
-
-import net.schmizz.sshj.SSHClient
-import net.schmizz.sshj.transport.verification.PromiscuousVerifier
-import net.schmizz.sshj.sftp.SFTPClient
-import net.schmizz.sshj.sftp.RemoteResourceInfo
-
-try {
-
-    def client = new SSHClient()
-
-    client.addHostKeyVerifier(new PromiscuousVerifier())
-    client.connect("hostname")
-    client.authPassword("username", "s$cret")
-    
-    SFTPClient sftp = client.newSFTPClient()
-
-    List<RemoteResourceInfo> resourceInfoList = sftp.ls("/web/perl/")
-
-    for (def e : resourceInfoList) {
-        println(e.getName())
-    }
-
-} finally {
-    sftp.close() 
-    client.disconnect()
-}
-```
-
-
-## TableSaw dataframe 
-
-```groovy
-package com.zetcode
-
-@Grab(group='tech.tablesaw', module='tablesaw-core', version='0.41.0')
-@Grab(group='org.slf4j', module='slf4j-simple', version='1.7.32', scope='test')
-
-import tech.tablesaw.api.Table
-import static tech.tablesaw.aggregate.AggregateFunctions.min
-import static tech.tablesaw.aggregate.AggregateFunctions.max
-import static tech.tablesaw.aggregate.AggregateFunctions.mean
-import static tech.tablesaw.aggregate.AggregateFunctions.median
-import static tech.tablesaw.aggregate.AggregateFunctions.count
-
-def tbl = Table.read().csv("src/resources/cars.csv")
-
-println tbl.shape()
-println '---------------------------'
-
-println tbl.structure()
-println '---------------------------'
-
-println tbl.first(3)
-println '---------------------------'
-
-println tbl.last(2)
-println '---------------------------'
-
-println tbl.column('price').min()
-println tbl.column('price').max()
-println tbl.column('price').asList()
-
-println tbl.where { it.numberColumn(2).isGreaterThan(50_000) }
-println tbl.where { it.numberColumn(2).isLessThan(25_000) }.rowCount()
-
-println '---------------------------'
-
-def price = tbl.nCol('price')
-println tbl.summarize(price, count, max, min, mean, median).apply()
-
-println '---------------------------'
-
-println tbl.select("name", "price")
-
-
-println '---------------------------'
-println tbl.sampleN(4)
-
-println '---------------------------'
-
-println tbl.sortAscendingOn("price")
-```
-
-
-## Playwright  
-
-Browser automation with Playwright  
-
-```groovy
-@Grab(group='com.microsoft.playwright', module='playwright', version='1.19.0')
-
-import com.microsoft.playwright.Playwright
-
-Playwright.create().withCloseable { client -> 
-
-    def browser = client.chromium().launch()
-
-    def page = browser.newPage()
-
-    page.navigate("http://webcode.me")
-    println page.title()
-}
-```
-
-## Generate test data 
-
-Generating test data with `datafaker`.  
-
-```groovy
-@Grab(group='net.datafaker', module='datafaker', version='2.0.1')
-
-import net.datafaker.Faker
-
-import java.util.concurrent.TimeUnit
-
-def faker = new Faker()
-
-println faker.name().fullName()
-
-String firstName = faker.name().firstName()
-String lastName = faker.name().lastName()
-println "${firstName} ${lastName}"
-
-println faker.address().streetAddress()
-
-println faker.job().title()
-println faker.job().position()
-
-println faker.country().name()
-println faker.country().capital()
-
-println faker.date().birthday()
-println faker.date().birthday('Y/M/d')
-println faker.date().birthday(18, 65)
-println faker.date().future(30, TimeUnit.DAYS)
-```
-
-
-
-## Groovy template engine
-
-### Simple
-
-```groovy
-import groovy.text.SimpleTemplateEngine
-
-def text = 'Hello $name!'
-
-def ctx = ["name": "John Doe"]
-
-def engine = new SimpleTemplateEngine() 
-def res = engine.createTemplate(text).make(ctx)
-
-println res
-```
-
-### From file
-
-```jsp
-${name} is a ${occupation}
-```
-
-This is `message.txt` file.
-
-```groovy
-import groovy.text.SimpleTemplateEngine
-
-def text = new File("message.txt").text
-def ctx = ["name": "John Doe", "occupation": "gardener"]
-
-def engine = new SimpleTemplateEngine() 
-def res = engine.createTemplate(text).make(ctx)
-
-println res
-```
-
-### Loop 
-
-```groovy
-import groovy.text.SimpleTemplateEngine
-
-def words = [ "sky", "blue", "cran", "cotton", "wood" ]
-
-def ctx = [words: words]
-
-def engine = new SimpleTemplateEngine()
-def text = '''<% words.each { println "${it} has ${it.length()} characters" } %>'''
-
-def res = engine.createTemplate(text).make(ctx)
-println res
-```
-
-### Records
-
-```groovy
-import groovy.text.SimpleTemplateEngine
-
-record User(String name, String occupation) {}
-
-def text = '<% users.each { println "${it.name} is a ${it.occupation}" } %>'
-
-def users = [ 
-    new User("John Doe", "gardener"), new User("Roger Roe", "driver"), 
-    new User("Peter Smith", "teacher")
-]
-
-def ctx = [users: users]
-
-def engine = new SimpleTemplateEngine()
-
-def res = engine.createTemplate(text).make(ctx)
-println res
-```
-
-### If condition
-
-```jsp
-<% for (task in tasks) { %>
-    <% if (task.done) { %>
-        <%= task.title %>
-    <% } %>
-<% } %>
-```
-
-```groovy
-import groovy.text.SimpleTemplateEngine
-import groovy.transform.Immutable
-
-@Immutable
-class Task {
-    String title
-    boolean done
-}
-
-def text = new File("tasks.txt").text
-
-def tasks = [ 
-    new Task("Task 1", true), new Task("Task 2", true), 
-    new Task("Task 3", false), new Task("Task 4", true), 
-    new Task("Task 5", false) 
-]
-
-def ctx = ["tasks": tasks]
-
-def engine = new SimpleTemplateEngine()
-
-def res = engine.createTemplate(text).make(ctx)
-def out = res.toString()
-
-println out.replaceAll("\s{2,}", "").replaceAll("\n{2,}", "\n").strip()
-```
-
-
-## Jinjava template engine
-
-```jinja
-{%- for task in tasks -%}
-    {% if task.done %}
-        {{ task.title }}
-    {% endif %}
-{%- endfor %}
-```
-This is `tasks.jinja` template file.
-
-```groovy
-@Grab(group='com.hubspot.jinjava', module='jinjava', version='2.6.0')
-
-import com.hubspot.jinjava.Jinjava
-import groovy.transform.Immutable
-
-@Immutable
-class Task {
-    String title
-    boolean done
-}
-
-def jnj = new Jinjava()
-
-def tasks = [ new Task("Task 1", true),
-    new Task("Task 2", true), new Task("Task 3", false),
-    new Task("Task 4", true), new Task("Task 5", false) ]
-
-def context = ["tasks": tasks]
-
-def fileName = "tasks.jinja"
-def template = new File(fileName).text
-
-def res = jnj.render(template, context)
-println res
-
-// record Task(String title, boolean done) { }
-```
-
-Records are not working, we use `@Immutable` instead.  
 
 
