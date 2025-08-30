@@ -1,8 +1,8 @@
 # C# Lambda Expressions
 
-Lambda expressions in C# provide a concise way to write anonymous functions.
-They are commonly used with delegates, LINQ operations, and expression trees.
-Lambda expressions can replace anonymous methods in most cases with cleaner
+Lambda expressions in C# provide a concise way to write anonymous functions.  
+They are commonly used with delegates, LINQ operations, and expression trees.  
+Lambda expressions can replace anonymous methods in most cases with cleaner  
 syntax.
 
 ## Basic Lambda Expression Syntax
@@ -427,13 +427,13 @@ static void DemonstrateClosurePerformance()
 
 ## Summary
 
-Lambda expressions in C# provide a powerful and concise syntax for functional
-programming patterns. They work seamlessly with delegates, LINQ, and expression
-trees, enabling elegant solutions to complex problems. Key points to remember:
+Lambda expressions in C# provide a powerful and concise syntax for functional  
+programming patterns. They work seamlessly with delegates, LINQ, and expression  
+trees, enabling elegant solutions to complex problems. Key points to remember:  
 
-- Use `=>` operator to separate parameters from expression or statement body
-- Leverage Action, Func, and Predicate delegates for different scenarios  
-- LINQ operations heavily utilize lambda expressions for data querying
-- Be mindful of closure captures and their performance implications
-- Expression trees allow meta-programming and dynamic query construction
-- Lambda expressions enable functional programming styles in C#
+- Use `=>` operator to separate parameters from expression or statement body  
+- Leverage Action, Func, and Predicate delegates for different scenarios    
+- LINQ operations heavily utilize lambda expressions for data querying  
+- Be mindful of closure captures and their performance implications  
+- Expression trees allow meta-programming and dynamic query construction  
+- Lambda expressions enable functional programming styles in C#  
