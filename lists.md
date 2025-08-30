@@ -419,10 +419,10 @@ $ dotnet run
 
 ## C# List FindAll
 
-The `FindAll` method retrieves all the elements of a list that match
-the conditions defined by the specified predicate. It returns a list containing
-all the elements that match the conditions defined by the specified predicate,
-if found; otherwise, an empty list.
+The `FindAll` method retrieves all the elements of a list that match  
+the conditions defined by the specified predicate. It returns a list containing  
+all the elements that match the conditions defined by the specified predicate,  
+if found; otherwise, an empty list.  
 
 A predicate is a method that returns a boolean value.
 
@@ -451,14 +451,14 @@ These are the positive values of the list.
 
 ## C# List Find, FindLast, FindIndex, FindLastIndex
 
-The `Find` method returns the first occurrence of the element that
-matches the given predicate. The `FindLast` method  returns the last
-occurrence of the element that matches the given predicate.
+The `Find` method returns the first occurrence of the element that  
+matches the given predicate. The `FindLast` method  returns the last  
+occurrence of the element that matches the given predicate.  
 
-The `FindIndex` method returns the index of the first occurrence of
-the element that matches the given predicate. The `FindLastIndex`
-method returns the index of the last occurrence of the element that matches the
-given predicate.
+The `FindIndex` method returns the index of the first occurrence of  
+the element that matches the given predicate. The `FindLastIndex`  
+method returns the index of the last occurrence of the element that matches the  
+given predicate.  
 
 ```csharp
 List<int> nums = [6, -2, 1, 5, 4, 3, 2, 9, -1, 7];
@@ -488,8 +488,8 @@ $ dotnet run
 
 ## C# List ConvertAll
 
-The `ConvertAll` method converts the elements in the current List to
-another type, and returns a list containing the converted elements.
+The `ConvertAll` method converts the elements in the current List to  
+another type, and returns a list containing the converted elements.  
 
 ```csharp
 List<string> words = ["falcon", "owl", "sky", "hawk", "stork"];
@@ -513,7 +513,7 @@ Here we convert the list to a list containing words transformed into uppercase.
 List<int> lengths = words.ConvertAll(s => s.Length);
 ```
 
-In the second case, the converted list contains integers that are the length of
+In the second case, the converted list contains integers that are the length of  
 the words in the original list.
 
 ```
@@ -522,7 +522,7 @@ FALCON, OWL, SKY, HAWK, STORK
 6, 3, 3, 4, 5
 ```
 
-In the second example, we have a separate `squareRoot` method, which
+In the second example, we have a separate `squareRoot` method, which  
 is applied on the list of integers.
 
 ```csharp
@@ -539,7 +539,7 @@ List<double> vals2 = vals.ConvertAll(converter);
 Console.WriteLine(string.Join(", ", vals2));
 ```
 
-In the example, we create a new list by applying square root operation on the
+In the example, we create a new list by applying square root operation on the  
 list of integers.
 
 ```
@@ -577,7 +577,7 @@ static class MyExtensions
 }
 ```
 
-In the example, we create a `Shuffle` extension method. It shuffles 
+In the example, we create a `Shuffle` extension method. It shuffles  
 the elements in-place.
 
 ```csharp
@@ -600,8 +600,8 @@ This is an implementation of the Fisher-Yates shuffling algorithm.
 
 ## C# List TrueForAll
 
-The `TrueForAll` determines whether every element in the list
-matches the conditions defined by the given predicate.
+The `TrueForAll` determines whether every element in the list  
+matches the conditions defined by the given predicate.  
 
 ```csharp
 List<int> nums = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -613,7 +613,7 @@ var res2 = nums.TrueForAll(e => e > 0);
 Console.WriteLine(res2);
 ```
 
-In the example, we check if the elements in the list are all even and that they
+In the example, we check if the elements in the list are all even and that they  
 are all positive.
 
 ```
@@ -626,16 +626,14 @@ Not all elements are even and all elements are positive.
 
 ## LINQ
 
-**Language-Integrated Query (LINQ)** is the name for a set of
-technologies based on the integration of query capabilities directly into the C#
-language.
+**Language-Integrated Query (LINQ)** is the name for a set of technologies based  
+on the integration of query capabilities directly into the C# language.
 
 Via LINQ, C# exposes plenty of methods for working with List data.
 
 ## C# List aggregate calculations
 
-LINQ has extension methods to calculate aggregate calculations, such as min,
-max, or sum.
+LINQ has extension methods to calculate aggregate calculations, such as min, max, or sum.
 
 ```csharp
 List<int> vals = [-1, 2, 1, -3, 7, -9, 5, 9, -4, 8];
@@ -677,9 +675,8 @@ The minimum value is: -9
 
 ## C# List ordering
 
-To order data, we can use the `OrderBy` and `ThenBy`
-extension methods. Note that the methods create a new modified list; the
-original list is not changed.
+To order data, we can use the `OrderBy` and `ThenBy` extension methods. Note that  
+the methods create a new modified list; the original list is not changed.
 
 ```csharp
 List<User> users =
