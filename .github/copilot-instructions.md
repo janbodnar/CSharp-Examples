@@ -22,22 +22,23 @@ the info here.
 ### Bootstrap and Build Process
 
 1. Create a new console project for testing examples:
+2. 
    ```bash
    mkdir -p /tmp/test-example
    cd /tmp/test-example
    dotnet new console
    ```
 
-2. Replace the default Program.cs content with the example code you want to test
+3. Replace the default Program.cs content with the example code you want to test
 
-3. Add any required packages (common ones include):
+4. Add any required packages (common ones include):
    ```bash
    dotnet add package Newtonsoft.Json          # For JSON examples
    dotnet add package Microsoft.SemanticKernel # For AI examples
    dotnet add package AngleSharp                # For web scraping examples
    ```
 
-4. Build and run:
+5. Build and run:
    ```bash
    dotnet build  # Takes 3-7 seconds normally. NEVER CANCEL.
    dotnet run    # Takes 3-6 seconds normally. NEVER CANCEL.
@@ -73,6 +74,7 @@ After making changes to examples, ALWAYS validate:
 ## Common Commands and Timing
 
 ### Project Creation and Basic Operations
+
 ```bash
 # Create new project - Takes 3-5 seconds
 dotnet new console
@@ -136,7 +138,7 @@ dotnet publish -c Release -r linux-x64 --self-contained true /p:PublishSingleFil
 ### Example Usage Patterns
 - Each .md file contains multiple independent code examples  
 - Examples show expected output using `$ dotnet run` format  
-- All examples are designed to work with .NET 8.0 (current version)  
+- All examples are designed to work with .NET 9.0 (current version)  
 - AI examples require API keys (document this in any AI-related changes)  
 
 ## Common Tasks and Workflow
@@ -150,6 +152,7 @@ dotnet publish -c Release -r linux-x64 --self-contained true /p:PublishSingleFil
 6. Document timing and any special requirements  
 
 ### Validating AI Examples
+
 1. Create project and add Microsoft.SemanticKernel package  
 2. Copy AI example code (expect API key errors at runtime)  
 3. Verify compilation succeeds  
@@ -157,16 +160,18 @@ dotnet publish -c Release -r linux-x64 --self-contained true /p:PublishSingleFil
 5. Never include real API keys in examples  
 
 ### Adding New Examples
+
 1. Follow existing format with code blocks and expected output  
 2. Test ALL code examples before committing  
 3. Include package requirements in comments  
 4. Use modern C# 9 syntax per AGENTS.md guidelines  
-5. Keep lines under 80 characters for documentation text  
+5. Keep lines under 80 characters for documentation text
+6. Add two spaces after each text line
 
 ## Development Environment
 
-- **Dotnet Version**: 8.0.119 (verify with `dotnet --version`)  
-- **Target Framework**: net8.0  
+- **Dotnet Version**: 9.0.109 (verify with `dotnet --version`)  
+- **Target Framework**: net9.0  
 - **Platform**: Cross-platform (Linux/Windows/Mac)  
 - **No Build System**: Repository contains examples only, not a buildable project  
 - **No Tests**: No automated test suite - validation is manual  
