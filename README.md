@@ -164,7 +164,6 @@ Console.WriteLine(boxedInt.GetType().IsValueType); // True (type info preserved)
 ## Steps 
 
 ```csharp
-
 // Usage
 1.0.Step(4.0, 0.5, x => Console.Write($"{x} "));
 Console.WriteLine("\n-----------------------");
@@ -249,12 +248,16 @@ for (int i = 0; i < stringInfo.LengthInTextElements; i++)
     Console.WriteLine(stringInfo.SubstringByTextElements(i, 1));
 }
 
+Console.WriteLine("----------------");
+
 // Method 2: Using TextElementEnumerator  
 var enumerator = StringInfo.GetTextElementEnumerator(text);
 while (enumerator.MoveNext())
 {
     Console.WriteLine(enumerator.Current);
 }
+
+Console.WriteLine("----------------");
 
 // Method 3: Using Rune (C# 8+)
 foreach (var rune in text.EnumerateRunes())
