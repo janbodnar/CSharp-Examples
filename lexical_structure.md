@@ -28,8 +28,6 @@ comments. XML comments can be extracted to HTML files.
 Multi-line comments are enclosed by /* */ characters. Single line comments  
 start with two forward slashes.
 
-Program.cs
-
 ```csharp
 /*
     This is Program.cs
@@ -166,8 +164,6 @@ string nationality = "Hungarian";
 
 In the example above, `29` is an integer literal, while `"Hungarian"` is a string literal.
 
-Program.cs
-
 ```csharp
 bool isSingle = true;
 string name = "James";
@@ -210,7 +206,8 @@ He was born in 1987
 
 ## C# operators
 
-An *operator* is a symbol used to perform an action on some value. Operators are used in expressions to describe operations involving one or more operands.
+An *operator* is a symbol used to perform an action on some value. Operators are used in  
+expressions to describe operations involving one or more operands.
 
 ```
 +    -    *    /    %    ^    &    |    !    ~
@@ -220,8 +217,6 @@ An *operator* is a symbol used to perform an action on some value. Operators are
 ```
 
 The above example shows various C# operators.
-
-Program.cs
 
 ```csharp
 int a = 10;
@@ -242,8 +237,6 @@ $ dotnet run
 ## C# delimiters
 
 *Delimiters* are characters used to separate or group elements in C# code. They help define the structure and organization of statements, expressions, and code blocks. Common delimiters in C# include parentheses, braces, brackets, semicolons, and commas.
-
-Program.cs
 
 ```csharp
 int[] numbers = {1, 2, 3, 4, 5};
@@ -274,7 +267,6 @@ Keywords in C# are reserved words that have special meaning within the language.
 
 C# includes a wide range of keywords, such as `if`, `else`, `for`, `while`, `base`, `false`, `float`, `catch`, and `this`. These keywords play a crucial role in various aspects of programming and are introduced progressively throughout the tutorial.
 
-Program.cs
 
 ```csharp
 for (int i = 0; i <= 5; i++)
