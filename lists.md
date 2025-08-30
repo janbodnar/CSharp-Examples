@@ -69,7 +69,6 @@ To get a quick look at the contents of the list, we join all the values into a
 string, separated by comma.
 
 ```
-```
 $ dotnet run
 forest, oak, river, falcon
 ```
@@ -103,7 +102,6 @@ Console.WriteLine($"There are {vals.Count} elements in the list");
 
 Here we print the number of elements in the List.
 
-```
 ```
 $ dotnet run
 There are 6 elements in the list
@@ -142,7 +140,6 @@ Console.WriteLine(vals[^2]);
 
 With the `^` operator, we can access elements from the end of the list.
 
-```
 ```
 $ dotnet run
 0
@@ -185,7 +182,6 @@ words.AddRange(words2);
 
 With `AddRange` method, we add another collection to the list.
 
-```
 ```
 $ dotnet run
 forest,oak,river,falcon,sky,ocean,owl,hawk
@@ -233,9 +229,8 @@ In the example, we check if the `oak` word is in the list.
 
 ## C# List removing elements
 
-The `Remove`, `RemoveAt`, `RemoveAll`,
-`RemoveRange`, and `Clear` methods can be used to remove
-elements from a list.
+The `Remove`, `RemoveAt`, `RemoveAll`, `RemoveRange`, and `Clear` methods  
+can be used to remove elements from a list.
 
 ```csharp
 List<int> nums = [0, 1, 2, -3, 4, -5, 6, 7, -8, 9, 10];
@@ -258,6 +253,7 @@ Console.WriteLine("{0}", nums.Count);
 
 In the example, we remove elements from the list of integers.
 
+```csharp
 nums.RemoveAll(e => e < 0);
 Console.WriteLine(string.Join(", ", nums));
 ```
@@ -270,11 +266,13 @@ nums.Remove(0);
 
 The `Remove` method removes the first occurrence of the 0 value.
 
+```csharp
 nums.RemoveAt(nums.Count - 1);
 ```
 
 With `RemoveAt`, we remove the element at the given index.
 
+```csharp
 nums.RemoveRange(0, 3);
 ```
 
@@ -318,11 +316,13 @@ words.ForEach(word => Console.WriteLine(word.ToUpper()));
 
 We call the `ForEach` method twice on a list of words.
 
+```csharp
 words.ForEach(Console.WriteLine);
 ```
 
 We print all elements of the list.
 
+```csharp
 words.ForEach(word => Console.WriteLine(word.ToUpper()));
 ```
 
@@ -369,9 +369,11 @@ for (int i = 0; i < nums.Count; i++)
 
 The example shows three ways of looping over a list in C#.
 
+```csharp
 nums.ForEach(e => Console.WriteLine(e));
 ```
 
+```csharp
 We loop over a list with `ForEach`.
 
 foreach(int e in nums)
@@ -382,6 +384,7 @@ foreach(int e in nums)
 
 In this case, we use the `foreach` statement.
 
+```csharp
 for (int i = 0; i < nums.Count; i++)
 {
     Console.WriteLine(nums[i]);
@@ -390,23 +393,6 @@ for (int i = 0; i < nums.Count; i++)
 
 Finally, this is the classic for loop.
 
-```
-$ dotnet run
-1
-2
-3
-4
-********************
-1
-2
-3
-4
-********************
-1
-2
-3
-4
-```
 
 ## C# sort, reverse List
 
@@ -438,8 +424,7 @@ the conditions defined by the specified predicate. It returns a list containing
 all the elements that match the conditions defined by the specified predicate,
 if found; otherwise, an empty list.
 
-A predicate is a method that returns a boolean value. To learn more about 
-predicates, visit the [C# Predicate tutorial](/csharp/predicate/).
+A predicate is a method that returns a boolean value.
 
 ```csharp
 
@@ -451,6 +436,7 @@ Console.WriteLine(string.Join(',', filtered));
 
 The example finds all positive elements.
 
+```csharp
 List<int> filtered = vals.FindAll(e => e > 0);
 ```
 
@@ -517,11 +503,13 @@ Console.WriteLine(string.Join(", ", lengths));
 
 In the example, we have a list of words. We convert the list to two other lists.
 
+```csharp
 List<string> uppedWords = words.ConvertAll(s => s.ToUpper());
 ```
 
 Here we convert the list to a list containing words transformed into uppercase.
 
+```csharp
 List<int> lengths = words.ConvertAll(s => s.Length);
 ```
 
@@ -592,6 +580,7 @@ static class MyExtensions
 In the example, we create a `Shuffle` extension method. It shuffles 
 the elements in-place.
 
+```csharp
 public static void Shuffle<T>(this IList<T> vals)
 {
     int n = vals.Count;
@@ -608,19 +597,6 @@ public static void Shuffle<T>(this IList<T> vals)
 
 This is an implementation of the Fisher-Yates shuffling algorithm.
 
-```
-$ dotnet run
-7 1 5 6 4 2 3 8
-```
-$ dotnet run
-7 5 4 1 2 3 6 8
-```
-$ dotnet run
-2 3 8 5 1 4 7 6
-```
-$ dotnet run
-4 5 1 6 8 2 3 7
-```
 
 ## C# List TrueForAll
 
@@ -745,6 +721,7 @@ record User(string FirstName, string LastName, int Salary);
 We have a list of users. The users are sorted first by their last names, then by
 their salaries.
 
+```csharp
 var sortedUsers = users.OrderBy(u => u.LastName).ThenBy(u => u.Salary);
 ```
 
@@ -838,8 +815,7 @@ index is returned; otherwise, a negative number is returned.
 
 ## C# List ConvertAll: string to int
 
-The `ConvertAll` method can be used to convert a list of one type  
-to another.
+The `ConvertAll` method can be used to convert a list of one type to another.  
 
 ```c#
 List<string> numbers = ["1", "2", "3", "4"];
@@ -848,7 +824,7 @@ List<int> ints = numbers.ConvertAll(int.Parse);
 Console.WriteLine(string.Join(", ", ints));
 ```
 
-This example uses `ConvertAll` to convert a list of strings representing numbers into a  
-list of integers. Each string is parsed to an int.
+This example uses `ConvertAll` to convert a list of strings representing numbers into a   
+list of integers. Each string is parsed to an int.  
 
 
