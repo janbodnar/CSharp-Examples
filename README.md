@@ -7,6 +7,20 @@ Groovy code examples
 `println System.getProperty("user.dir")` print current working directory  
 `println "ls -la".execute().text` execute shell command  
 
+C# equivalents:
+```csharp
+Console.WriteLine(Environment.CurrentDirectory); // print current working directory
+
+// Execute shell command
+var result = Process.Start(new ProcessStartInfo("ls", "-la") 
+{ 
+    RedirectStandardOutput = true, 
+    UseShellExecute = false 
+});
+result.WaitForExit();
+Console.WriteLine(result.StandardOutput.ReadToEnd());
+```
+
 ```groovy
 def isOdd = { int i -> (i & 1) as boolean }
 def isEven = {int i -> ! isOdd(i) }
@@ -15,7 +29,18 @@ even/odd
 
 `def evens = [1, 2, 3, 4, 5].findAll{ it % 2 == 0 }` - filter out even values  
 
-## Debug macros 
+C# equivalents:
+```csharp
+// Lambda functions for odd/even
+Func<int, bool> isOdd = i => (i & 1) == 1;
+Func<int, bool> isEven = i => !isOdd(i);
+
+// Filter even values using LINQ
+var evens = new[] {1, 2, 3, 4, 5}.Where(it => it % 2 == 0).ToArray();
+Console.WriteLine($"[{string.Join(", ", evens)}]"); // [2, 4]
+```  
+
+## Debug macros (Groovy-specific - skipped)
 
 ```groovy
 def name = 'John Doe'
@@ -29,6 +54,8 @@ println SVI(name, vals, words, r)
 println NV(r)
 println NVL(r)
 ```
+
+*Note: Debug macros like SV(), SVI(), NV(), NVL() are Groovy-specific and don't have direct C# equivalents. In C# debugging, you would typically use debugger tools, Console.WriteLine, or logging frameworks like Serilog or NLog.*
 
 ## Executable JARs in Gradle 
 
@@ -227,7 +254,7 @@ Console.WriteLine(boxedInt.GetType().Name); // Int32
 Console.WriteLine(boxedInt.GetType().IsValueType); // True (type info preserved)
 ```
 
-## Import Groovy code in script
+## Import Groovy code in script (Groovy-specific - skipped)
 
 ```groovy
 package com.zetcode 
@@ -248,6 +275,8 @@ println u
 
 Run the app `$ groovy com\zetcode\main.groovy`  
 
+*Note: This is specific to Groovy's dynamic class loading. In C#, you would use assemblies, namespaces, and standard project references or dynamic compilation with Roslyn if needed.*  
+
 ## Steps
 
 ```groovy
@@ -257,6 +286,45 @@ println "\n-----------------------"
 1.step(10, 1) { 
     
     println it
+}
+```
+
+C# equivalent using custom step methods:
+
+```csharp
+// Extension method for step functionality
+public static class NumberExtensions
+{
+    public static void Step(this double start, double end, double step, Action<double> action)
+    {
+        for (double i = start; i <= end; i += step)
+        {
+            action(i);
+        }
+    }
+    
+    public static void Step(this int start, int end, int step, Action<int> action)
+    {
+        for (int i = start; i <= end; i += step)
+        {
+            action(i);
+        }
+    }
+}
+
+// Usage
+1.0.Step(4.0, 0.5, x => Console.Write($"{x} "));
+Console.WriteLine("\n-----------------------");
+
+1.Step(10, 1, x => Console.WriteLine(x));
+
+// Alternative using LINQ and ranges
+var stepSequence = Enumerable.Range(0, (int)((4.0 - 1.0) / 0.5) + 1)
+    .Select(i => 1.0 + i * 0.5);
+
+foreach (var value in stepSequence)
+{
+    Console.Write($"{value} ");
 }
 ```
 
@@ -287,13 +355,15 @@ Console.WriteLine(randomWord);
 ```
 
 
-## Unix pipes
+## Unix pipes (Groovy-specific - skipped)
 
 ```groovy
 def p = 'ls -l'.execute()  | ['awk', '{ print $1, $NF }'].execute()
 p.waitFor()
 println p.text
 ```
+
+*Note: Groovy's native pipe operator for processes doesn't have a direct C# equivalent. In C#, you would need to use ProcessStartInfo with RedirectStandardOutput/Input to chain processes manually.*
 
 ## Download image
 
@@ -381,6 +451,44 @@ cards.shuffle()
 println cards.take(5)
 ```
 
+C# equivalent using LINQ for combinations:
+
+```csharp
+var signs = Enumerable.Range(2, 9).Select(n => n.ToString())
+    .Concat(new[] {"J", "Q", "K", "A"});
+var symbols = new[] {"♣", "♦", "♥", "♠"};
+
+// Create all combinations using LINQ
+var cards = from symbol in symbols
+           from sign in signs
+           select symbol + sign;
+
+var cardList = cards.ToList();
+Console.WriteLine($"[{string.Join(", ", cardList)}]");
+
+// Shuffle the deck
+var random = new Random();
+var shuffledCards = cardList.OrderBy(x => random.Next()).ToList();
+
+// Take first 5 cards
+var hand = shuffledCards.Take(5);
+Console.WriteLine($"Hand: [{string.Join(", ", hand)}]");
+
+// Alternative shuffle using Fisher-Yates
+static void Shuffle<T>(IList<T> list, Random rng)
+{
+    for (int i = list.Count - 1; i > 0; i--)
+    {
+        int j = rng.Next(i + 1);
+        (list[i], list[j]) = (list[j], list[i]);
+    }
+}
+
+var deckCopy = cardList.ToList();
+Shuffle(deckCopy, random);
+Console.WriteLine($"Shuffled: [{string.Join(", ", deckCopy.Take(5))}]");
+```
+
 ## Shuffle emoji cards
 
 ```groovy
@@ -418,6 +526,61 @@ def show(cards) {
 
 cards.shuffle()
 show(cards)
+```
+
+C# equivalent with emoji cards and display function:
+
+```csharp
+var cards = new[]
+{
+    "🂡", "🂱", "🃁", "🃑",
+    "🂢", "🂲", "🃂", "🃒",
+    "🂣", "🂳", "🃃", "🃓",
+    "🂤", "🂴", "🃄", "🃔",
+    "🂥", "🂵", "🃅", "🃕",
+    "🂦", "🂶", "🃆", "🃖",
+    "🂧", "🂷", "🃇", "🃗",
+    "🂨", "🂸", "🂸", "🂸",
+    "🂩", "🂩", "🃉", "🃙",
+    "🂪", "🂺", "🃊", "🃚",
+    "🂫", "🂻", "🃋", "🃛",
+    "🂭", "🂽", "🃍", "🃝",
+    "🂮", "🂾", "🃎", "🃞"
+};
+
+static void Show(string[] cards)
+{
+    for (int i = 0; i < cards.Length; i++)
+    {
+        if (i != 0 && i % 13 == 0)
+        {
+            Console.WriteLine();
+        }
+        Console.Write($"{cards[i]} ");
+    }
+    Console.WriteLine();
+}
+
+// Shuffle cards
+var random = new Random();
+var shuffledCards = cards.OrderBy(x => random.Next()).ToArray();
+
+Show(shuffledCards);
+
+// Alternative: using Fisher-Yates shuffle
+static void ShuffleInPlace<T>(T[] array, Random rng)
+{
+    for (int i = array.Length - 1; i > 0; i--)
+    {
+        int j = rng.Next(i + 1);
+        (array[i], array[j]) = (array[j], array[i]);
+    }
+}
+
+var cardsCopy = (string[])cards.Clone();
+ShuffleInPlace(cardsCopy, random);
+Console.WriteLine("\nAlternative shuffle:");
+Show(cardsCopy);
 ```
 
 ## Ranges 
@@ -467,6 +630,53 @@ for (def d in days) {
     
     println d
 }
+```
+
+C# equivalent using various range approaches:
+
+```csharp
+// Basic range using Enumerable.Range
+var vals = Enumerable.Range(1, 10);
+Console.WriteLine($"From: 1, To: 10");
+Console.WriteLine($"[{string.Join(", ", vals)}]");
+
+// Steps using Where with modulo
+var vals2 = Enumerable.Range(1, 7).Where(x => x % 2 == 1);
+Console.WriteLine($"[{string.Join(", ", vals2)}]"); // [1, 3, 5, 7]
+
+// Reverse range
+var vals3 = Enumerable.Range(1, 10).Reverse();
+Console.WriteLine($"[{string.Join(", ", vals3)}]");
+
+// Exclusive ranges (equivalent to 1..<10)
+var vals4 = Enumerable.Range(1, 9); // Excludes 10
+Console.WriteLine($"[{string.Join(", ", vals4)}]");
+
+// Character range
+var chars = Enumerable.Range('a', 26).Select(i => (char)i);
+Console.WriteLine($"[{string.Join(", ", chars)}]");
+Console.WriteLine($"Size: {chars.Count()}");
+Console.WriteLine($"Contains 'c': {chars.Contains('c')}");
+
+// Date and time ranges
+var months = Enum.GetValues<DayOfWeek>(); // Using enum values
+foreach (var month in Enum.GetValues<DateTimeKind>())
+{
+    // Console.WriteLine(month); // Example with enum
+}
+
+// Date range
+var startDate = DateTime.Now;
+var days = Enumerable.Range(0, 18).Select(i => startDate.AddDays(i));
+foreach (var day in days)
+{
+    Console.WriteLine(day.ToString("yyyy-MM-dd"));
+}
+
+// C# 8+ Range operator (limited usage)
+int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+var slice = array[1..^1]; // Excludes first and last elements
+Console.WriteLine($"[{string.Join(", ", slice)}]");
 ```
 
 ## Method chaining
@@ -545,6 +755,65 @@ def users = [
 
 println users
 println users.sort()
+```
+
+C# equivalent using IComparable and custom comparers:
+
+```csharp
+var words = new[] {"sky", "water", "emotion", "shredder", 
+    "anonymous", "on", "a", "copper", "the", "elephant"};
+
+// Sort by length ascending (equivalent to <=>)
+var sortedAsc = words.OrderBy(w => w.Length).ToArray();
+Console.WriteLine($"[{string.Join(", ", sortedAsc)}]");
+
+// Sort by length descending
+var sortedDesc = words.OrderByDescending(w => w.Length).ToArray();
+Console.WriteLine($"[{string.Join(", ", sortedDesc)}]");
+
+// Using IComparable<T> interface
+public class User : IComparable<User>
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Occupation { get; set; }
+
+    public User(string firstName, string lastName, string occupation)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Occupation = occupation;
+    }
+
+    public int CompareTo(User? other)
+    {
+        if (other == null) return 1;
+        return string.Compare(LastName, other.LastName, StringComparison.Ordinal);
+    }
+
+    public override string ToString()
+    {
+        return $"{FirstName} {LastName} - {Occupation}";
+    }
+}
+
+var users = new[]
+{
+    new User("John", "Doe", "gardener"),
+    new User("Roger", "Roe", "driver"),
+    new User("Lucia", "Smith", "accountant"),
+    new User("Paul", "Newman", "firefighter"),
+    new User("Adam", "Clapton", "teacher"),
+    new User("Jane", "Walter", "pilot")
+};
+
+Console.WriteLine("Original:");
+foreach (var user in users)
+    Console.WriteLine(user);
+
+Console.WriteLine("\nSorted:");
+foreach (var user in users.OrderBy(u => u))
+    Console.WriteLine(user);
 ```
 
 ## grepping/filtering  
@@ -645,6 +914,24 @@ println sum(1, 3)
 ```
 
 This code fails.
+
+C# equivalent showing proper method declaration:
+
+```csharp
+// C# requires explicit return types and parameter types
+static int Sum(int x, int y)
+{
+    return x + y;
+}
+
+Console.WriteLine(Sum(1, 3)); // 4
+
+// Using generic method for flexibility
+static T Sum<T>(T x, T y) where T : INumber<T>
+{
+    return x + y;
+}
+```
 
 
 ## Process
