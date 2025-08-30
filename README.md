@@ -150,6 +150,23 @@ Console.WriteLine(boxedInt.GetType().IsValueType); // True (type info preserved)
 ## Steps 
 
 ```csharp
+
+// Usage
+1.0.Step(4.0, 0.5, x => Console.Write($"{x} "));
+Console.WriteLine("\n-----------------------");
+
+1.Step(10, 1, x => Console.WriteLine(x));
+
+// Alternative using LINQ and ranges
+var stepSequence = Enumerable.Range(0, (int)((4.0 - 1.0) / 0.5) + 1)
+    .Select(i => 1.0 + i * 0.5);
+
+foreach (var value in stepSequence)
+{
+    Console.Write($"{value} ");
+}
+
+
 // Extension method for step functionality
 public static class NumberExtensions
 {
@@ -168,21 +185,6 @@ public static class NumberExtensions
             action(i);
         }
     }
-}
-
-// Usage
-1.0.Step(4.0, 0.5, x => Console.Write($"{x} "));
-Console.WriteLine("\n-----------------------");
-
-1.Step(10, 1, x => Console.WriteLine(x));
-
-// Alternative using LINQ and ranges
-var stepSequence = Enumerable.Range(0, (int)((4.0 - 1.0) / 0.5) + 1)
-    .Select(i => 1.0 + i * 0.5);
-
-foreach (var value in stepSequence)
-{
-    Console.Write($"{value} ");
 }
 ```
 
