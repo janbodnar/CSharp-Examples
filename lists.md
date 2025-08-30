@@ -832,24 +832,23 @@ int idx = nums.BinarySearch(5);
 Console.WriteLine(idx); // prints 2
 ```
 
-This example demonstrates how to use the `BinarySearch` method to
-find the index of an element in a sorted list. If the element is found, its
-index
-is returned; otherwise, a negative number is returned.
+This example demonstrates how to use the `BinarySearch` method to   
+find the index of an element in a sorted list. If the element is found, its  
+index is returned; otherwise, a negative number is returned.  
 
 ## C# List ConvertAll: string to int
 
-The `ConvertAll` method can be used to convert a list of one type
+The `ConvertAll` method can be used to convert a list of one type  
 to another.
 
-```csharp
+```c#
 List<string> numbers = ["1", "2", "3", "4"];
 List<int> ints = numbers.ConvertAll(int.Parse);
 
 Console.WriteLine(string.Join(", ", ints));
 ```
 
-This example uses `ConvertAll` to convert a list of strings
-representing numbers into a list of integers. Each string is parsed to an int.
+This example uses `ConvertAll` to convert a list of strings representing numbers into a  
+list of integers. Each string is parsed to an int.
 
 
