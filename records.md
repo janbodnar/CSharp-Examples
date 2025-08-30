@@ -1,163 +1,66 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>C# record - explaining the record type</title>
-<link rel="stylesheet" href="/cfg/style.css" type="text/css">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" content="C#, learn C#, record, tutorial, programming language, learn C#">
-<meta name="description" content="C# record tutorial shows how to work with the
-record type in C#. A record is a reference type whose purpose is to hold data.">
+# C# record
 
-<meta name="author" content="Jan Bodnar">
+*last modified July 5, 2023*
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9706709751191532"
-     crossorigin="anonymous"></script>
-</head>
+C# record tutorial shows how to work with the record type in C#.  
 
-<body>
+A record is a reference type whose main purpose is to hold data. It is very  
+useful for data analysis. The record type simplifies code and improves its  
+readability, and removes unnecessary boilerplate.  
 
-<header>
+The record type provides the following features:  
 
-<div>
-<a href="/" title="Home">ZetCode</a>
-</div>
+- concise syntax for data-centric objects
+- concise syntax for immutable data
+- value-based equality
+- concise syntax for non-destructive mutation
+- built-in formattting for printing
 
-<nav>
-    <a title="All tutorials" href="/all/">All</a>
-    <a title="Go tutorials" href="/golang/">Golang</a>
-    <a title="Python tutorials" href="/python/">Python</a>
-    <a title="C# tutorials" href="/csharp/">C#</a>
-    <a title="Java tutorials" href="/java/">Java</a>
-    <a title="JavaScript tutorials" href="/javascript/">JavaScript</a>
-    <a title="Subscribe to ZetCode news" href="http://zetcode.us13.list-manage.com/subscribe?u=9def9ccd4c70dbbaf691f90fc&id=6556210f80">Subscribe</a>
-</nav>
+The compiler creates an override of `Object.Equals(Object)` and  
+`Object.GetHashCode`. It creates methods for `==` and `!=` operators and  
+implements the `System.IEquatable<T>`. Records also provide an override of   
+`Object.ToString`.  
 
-</header>
+While records share a lot of similarities with standard classes, they have  
+different purposes. Classes are used for defining complex hierarchies of objects  
+and their responsitilities, records excel in storing data for the purpose of   
+their analysis.  
 
-<div class="container">
+**Note:** The record type is an important part of the functional programming  
+philosophy. It is a very useful tool for data analysis.  
 
-<div class="ltow">
+Important functional languages, such as F# and Clojure, have record types since  
+their inception. The record type appeared in C# 9.0.  
 
-<div id="ebooks">
+## C# record positional syntax
 
-<h2 class="blu">Ebooks</h2>
+To easiest way to create a record is to use the *positional syntax*.  
 
-<ul>
-<li><a href="/ebooks/advancedpyqt5/">PyQt5 ebook</a></li>
-<li><a href="/ebooks/tkinter/">Tkinter ebook</a></li>
-<li><a href="/ebooks/sqlitepython/">SQLite Python</a></li>
-<li><a href="/ebooks/advancedwxpython/">wxPython ebook</a></li>
-<li><a href="/ebooks/windowsapi/">Windows API ebook</a></li>
-<li><a href="/ebooks/advancedjavaswing/">Java Swing ebook</a></li>
-<li><a href="/ebooks/javagames/">Java games ebook</a></li>
-<li><a href="/ebooks/mysqljava/">MySQL Java ebook</a></li>
-</ul>
-
-</div>
-
-</div>
-
-
-<div class="content">
-
-<h1>C# record</h1>
-
-<p class="last_mod">
-last modified July 5, 2023
-</p>
- 
-<p>
-C# record tutorial shows how to work with the record type in C#. 
-</p>
-
-
-<p>
-A record is a reference type whose main purpose is to hold data. It is very
-useful for data analysis. The record type simplifies code and improves its
-readability, and removes unnecessary boilerplate.
-</p>
-
-<p>
-The record type provides the following features:
-</p>
-
-<ul>
-    <li>concise syntax for data-centric objects</li>
-    <li>concise syntax for immutable data</li>
-    <li>value-based equality</li>
-    <li>concise syntax for non-destructive mutation</li>
-    <li>built-in formattting for printing</li>
-</ul>
-
-<p>
-The compiler creates an override of <code>Object.Equals(Object)</code> and
-<code>Object.GetHashCode</code>. It creates methods for <code>==</code> and
-<code>!=</code> operators and implements the
-<code>System.IEquatable&lt;T&gt;</code>. Records also provide an override of  
-<code>Object.ToString</code>. 
-</p>
-
-<p>
-While records share a lot of similarities with standard classes, they have
-different purposes. Classes are used for defining complex hierarchies of objects
-and their responsitilities, records excel in storing data for the purpose of 
-their analysis.
-</p>
-
-
-<div class="note">
-<strong>Note:</strong> The record type is an important part of the functional 
-programming philosophy. It is a very useful tool for data analysis.
-</div>
-
-<p>
-Important functional languages, such as F# and Clojure, have record types since
-their inception. The record type appeared in C# 9.0.
-</p>
-
-
-<h2>C# record positional syntax</h2>
-
-<p>
-To easiest way to create a record is to use the <em>positional syntax</em>.
-</p>
-
-<pre class="compact">
+```csharp
 record User(string FirstName, string LastName, string occupation);
-</pre>
+```
 
-<p>
-Using this syntax, the compiler automatically creates the following:
-</p>
+Using this syntax, the compiler automatically creates the following:  
 
-<ul>
-    <li>a public init-only auto-implemented property for each positional
-    parameter provided in the record declaration. </li>
-    <li>a primary constructor whose parameters match the positional parameters
-    on the record declaration</li>
-    <li>a <code>Deconstruct</code> method with an out parameter for each
-    positional parameter provided in the record declaration</li>
-</ul>
+- a public init-only auto-implemented property for each positional parameter  
+  provided in the record declaration.
+- a primary constructor whose parameters match the positional parameters on  
+  the record declaration
+- a `Deconstruct` method with an out parameter for each positional parameter  
+  provided in the record declaration
 
-<p>
-The data created with positional syntax is immutable. Data immutability is an 
-important cornerstone of functional programming.
-</p>
+The data created with positional syntax is immutable. Data immutability is an  
+important cornerstone of functional programming.  
 
-<h2>C# record simple examples</h2>
+## C# record simple examples
 
-<p>
-In the following example, we create a simple record type.
-</p>
+In the following example, we create a simple record type.  
 
-<div class="codehead">Program.cs
-  <i class="fas fa-copy copy-icon" onclick="copyCode(this)"></i>
-</div>
-<pre class="code">
-var users = new List&lt;User&gt;
+**Program.cs**
+
+```csharp
+var users = new List<User>
 {
     new ("John", "Doe", 1230),
     new ("Lucy", "Novak", 670),
@@ -176,32 +79,26 @@ Console.WriteLine(users[0].LastName);
 Console.WriteLine(users[0].Salary);
 
 record User(string FirstName, string LastName, int Salary);
-</pre>
+```
 
-<p>
-We create a <code>User</code> record in one line; we are ready to use it. 
-</p>
+We create a `User` record in one line; we are ready to use it.  
 
-<pre class="explanation">
+```csharp
 users.ForEach(Console.WriteLine);
-</pre>
+```
 
-<p>
-We traverse the list of users and print them to the console. Thanks to the
-built-in formatting of records, we have a human-readable output for the records.
-</p>
+We traverse the list of users and print them to the console. Thanks to the  
+built-in formatting of records, we have a human-readable output for the records.  
 
-<pre class="explanation">
+```csharp
 Console.WriteLine(users[0].FirstName);
 Console.WriteLine(users[0].LastName);
 Console.WriteLine(users[0].Salary);
-</pre>
+```
 
-<p>
-The properties are automatically created.
-</p>
+The properties are automatically created.  
 
-<pre class="compact">
+```
 $ dotner run
 User { FirstName = John, LastName = Doe, Salary = 1230 }
 User { FirstName = Lucy, LastName = Novak, Salary = 670 }
@@ -214,17 +111,14 @@ User { FirstName = Albert, LastName = Novak, Salary = 1930 }
 John
 Doe
 1230
-</pre>
+```
 
-<p>
-In the second example, we use a record type with LINQ.
-</p>
+In the second example, we use a record type with LINQ.  
 
-<div class="codehead">Program.cs
-  <i class="fas fa-copy copy-icon" onclick="copyCode(this)"></i>
-</div>
-<pre class="code">
-var cars = new List&lt;Car&gt;
+**Program.cs**
+
+```csharp
+var cars = new List<Car>
 {
     new ("Audi", "red", 52642),
     new ("Mercedes", "blue", 57127),
@@ -250,15 +144,13 @@ foreach (var group in groups)
 }
 
 record Car(string Name, string Colour, int Price);
-</pre>
+```
 
-<p>
-We use LINQ expression to group our cars by their colours. Again, we have
-defined the record type in one line. We focus on the data analysis and not on 
-complex OOP techniques.
-</p>
+We use LINQ expression to group our cars by their colours. Again, we have  
+defined the record type in one line. We focus on the data analysis and not on  
+complex OOP techniques.  
 
-<pre class="compact">
+```
 $ dotnet run
 red
   Audi 52642
@@ -273,23 +165,19 @@ yellow
 white
   Citroen 21000
   Volkswagen 21600
-</pre>
+```
 
+## C# record equality
 
-<h2>C# record equality</h2>
+Records provide value-based equality. When we focus on data analysis, this is  
+the expected behaviour. Classes on the other hand provide reference equality  
+by default. To have value-based equality with classes, we have to add additional  
+lines of code to the class definitions, which is often done with IDE generators  
+and is considered boilerplate.  
 
-<p>
-Records provide value-based equality. When we focus on data analysis, this is 
-the expected behaviour. Classes on the other hand provide reference equality 
-by default. To have value-based equality with classes, we have to add additional 
-lines of code to the class definitions, which is often done with IDE generators
-and is considered boilerplate.
-</p>
+**Program.cs**
 
-<div class="codehead">Program.cs
-  <i class="fas fa-copy copy-icon" onclick="copyCode(this)"></i>
-</div>
-<pre class="code">
+```csharp
 var u1 = new User("John", "Doe", "gardener");
 var u2 = new User("John", "Doe", "gardener");
 
@@ -315,37 +203,28 @@ class Person
     public string LastName { get; set; }
     public string Occupation { get; set; }
 }
-</pre>
+```
 
-<p>
-In the example, we compare two records and two class objects having the same
-data.
-</p>
+In the example, we compare two records and two class objects having the same  
+data.  
 
-<pre class="compact">
+```
 $ dotnet run
 True
 False
-</pre>
+```
 
-<p>
-The records compare values while the class objects references. The second output
-is False because <code>p1</code> and <code>p2</code> point to two different
-objects in memory.
-</p>
+The records compare values while the class objects references. The second output  
+is False because `p1` and `p2` point to two different objects in memory.  
 
+## C# record Deconstruct
 
-<h2>C# record Deconstruct</h2>
+With the positional syntax, we have the `Deconstruct` method automatically  
+implemented.  
 
-<p>
-With the positional syntax, we have the <code>Deconstruct</code> method
-automatically implemented. 
-</p>
+**Program.cs**
 
-<div class="codehead">Program.cs
-  <i class="fas fa-copy copy-icon" onclick="copyCode(this)"></i>
-</div>
-<pre class="code">
+```csharp
 var u = new User("John", "Doe", 980);
 
 (string fname, string lname, int sal) = u;
@@ -353,39 +232,29 @@ var u = new User("John", "Doe", 980);
 Console.WriteLine($"{fname} {lname} earns {sal} per month");
 
 record User(string FirstName, string LastName, int Salary);
-</pre>
+```
 
-<p>
-A record's properties can be easily separated into variables with deconstrution
-operation.
-</p>
+A record's properties can be easily separated into variables with deconstrution  
+operation.  
 
-<pre class="compact">
+```
 $ dotnet run
 John Doe earns 980 per month
-</pre>
+```
 
 
+## C# record non-destructive mutation
 
+In functional programming, we work with immutable data. When we need to modify  
+data, we create modified copies of the original data, which is intact.  
+This simple rule brings huge benefits in concurrent programming.  
 
+We can use the `with` keyword to get modified copies of our records.  
 
-<h2>C# record non-destructive mutation</h2>
+**Program.cs**
 
-<p>
-In functional programming, we work with immutable data. When we need to modify 
-data, we create modified copies of the original data, which is intact. 
-This simple rule brings huge benefits in concurrent programming.
-</p>
-
-<p>
-We can use the <code>with</code> keyword to get modified copies of our records.
-</p>
-
-<div class="codehead">Program.cs
-  <i class="fas fa-copy copy-icon" onclick="copyCode(this)"></i>
-</div>
-<pre class="code">
-var users = new List&lt;User&gt;
+```csharp
+var users = new List<User>
 {
     new ("John", "Doe", 1230),
     new ("Lucy", "Novak", 670),
@@ -397,8 +266,8 @@ var users = new List&lt;User&gt;
     new ("Albert", "Novak", 1930),
 };
 
-var users2 = new List&lt;User&gt;();
-users.ForEach(u =&gt; users2.Add(u with { Salary = u.Salary + 200 }));
+var users2 = new List<User>();
+users.ForEach(u => users2.Add(u with { Salary = u.Salary + 200 }));
 
 users.ForEach(Console.WriteLine);
 
@@ -407,15 +276,13 @@ Console.WriteLine("---------------");
 users2.ForEach(Console.WriteLine);
 
 record User(string FirstName, string LastName, int Salary);
-</pre>
+```
 
-<p>
-In the example, we have a list of users. We want to add a bonus to each user.
-Rather than modifying the original list, we create a new one with their salaries
-modified.
-</p>
+In the example, we have a list of users. We want to add a bonus to each user.  
+Rather than modifying the original list, we create a new one with their salaries  
+modified.  
 
-<pre class="compact">
+```
 $ dotnet run
 User { FirstName = John, LastName = Doe, Salary = 1230 }
 User { FirstName = Lucy, LastName = Novak, Salary = 670 }
@@ -434,20 +301,17 @@ User { FirstName = Amy, LastName = Doe, Salary = 1450 }
 User { FirstName = Joe, LastName = Draker, Salary = 1390 }
 User { FirstName = Janet, LastName = Doe, Salary = 1180 }
 User { FirstName = Albert, LastName = Novak, Salary = 2130 }
-</pre>
+```
 
 
-<h2>C# mutable record</h2>
+## C# mutable record
 
-<p>
-It is possible to create a mutable record. However, when possible, the usage of 
-immutable records is preferred.
-</p>
+It is possible to create a mutable record. However, when possible, the usage of  
+immutable records is preferred.  
 
-<div class="codehead">Program.cs
-  <i class="fas fa-copy copy-icon" onclick="copyCode(this)"></i>
-</div>
-<pre class="code">
+**Program.cs**
+
+```csharp
 var u = new User("John", "Doe", "gardener");
 Console.WriteLine(u);
 
@@ -466,40 +330,32 @@ record User
     public string LastName { get; set; } = default!;
     public string Occupation { get; set; } = default!;
 };
-</pre>
+```
 
-<p>
-By implementing our own properties, we have a mutable record.
-</p>
+By implementing our own properties, we have a mutable record.  
 
-<pre class="compact">
+```
 $ dotnet run
 User { FirstName = John, LastName = Doe, Occupation = gardener }
 User { FirstName = John, LastName = Doe, Occupation = driver }
-</pre>
+```
 
 
-<h2>Web scraping example</h2>
+## Web scraping example
 
-<p>
-To demonstrate the usefulness of records, we have a more complex example which 
-scrapes data from a website. 
-</p>
+To demonstrate the usefulness of records, we have a more complex example which  
+scrapes data from a website.  
 
-<pre class="compact">
+```
 $ dotnet add package AngleSharp
 $ dotnet add package CsvHelper
-</pre>
+```
 
-<p>
-We need to add the <code>AngleSharp</code> and <code>CsvHelper</code> packages 
-to the project.
-</p>
+We need to add the `AngleSharp` and `CsvHelper` packages to the project.  
 
-<div class="codehead">Program.cs
-  <i class="fas fa-copy copy-icon" onclick="copyCode(this)"></i>
-</div>
-<pre class="code">
+**Program.cs**
+
+```csharp
 using System.Collections.Generic;
 using System.Globalization;
 using AngleSharp;
@@ -516,13 +372,13 @@ var trs = htable.QuerySelectorAll("tr").Skip(1);
 
 var csvConfig = new CsvHelper.Configuration.CsvConfiguration(CultureInfo.CurrentCulture)
 {
-    ShouldQuote = args =&gt; false
+    ShouldQuote = args => false
 };
 
 using var fs = new StreamWriter("data.csv");
 using var writer = new CsvWriter(fs, csvConfig);
 
-var rows = new List&lt;Row&gt;();
+var rows = new List<Row>();
 
 foreach (var tr in trs)
 {
@@ -536,62 +392,11 @@ foreach (var tr in trs)
 writer.WriteRecords(rows);
 
 record Row(string Rank, string Company, string Sales);
-</pre>
+```
 
-<p>
-In the example, we scrape data from a website. In the HTML table, there are 
-100 top retailers in the US. We connect to the website, parse the HTML table, 
-and pick three of its columns. The parsed data is saved into a CSV file.
-The example creates the <code>Row</code> record, which stores one row of the 
-parsed data.
-</p>
+In the example, we scrape data from a website. In the HTML table, there are  
+100 top retailers in the US. We connect to the website, parse the HTML table,  
+and pick three of its columns. The parsed data is saved into a CSV file.  
+The example creates the `Row` record, which stores one row of the parsed data.  
 
-<h2>Source</h2>
-
-<p>
-<a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record">Records - language reference</a>
-</p>
-
-<p>
-In this article we have covered C# record type. 
-</p>
-
-
-<h2 id="author">Author</h2>
-
-<p class="author">
-My name is Jan Bodnar, and I am a passionate programmer with extensive
-programming experience. I have been writing programming articles since 2007.
-To date, I have authored over 1,400 articles and 8 e-books. I possess more
-than ten years of experience in teaching programming.
-</p>
-
-<p>
-List <a href="/csharp/">all C# tutorials</a>.
-</p>
-
-</div> <!-- content -->
-
-</div> <!-- container -->
-
-<footer>
-
-<nav>
-<a title="Home page" href="/">Home</a>
-<a title="Follow on Twitter" href="https://twitter.com/janbodnar">Twitter</a>
-<a title="Visit Github" href="https://github.com/janbodnar">Github</a>
-<a title="Subscribe to ZetCode news" href="http://zetcode.us13.list-manage.com/subscribe?u=9def9ccd4c70dbbaf691f90fc&id=6556210f80">Subscribe</a>
-<a title="Privacy policy" href="/privacy">Privacy</a>
-<a title="About" href="/about/">About</a>
-</nav>
-
-<div>
-<span>&copy; 2007 - 2025 Jan Bodnar</span>
-<span>admin(at)zetcode.com</span>
-</div>
-
-</footer>
-
-<script src="/cfg/utils.js"></script>
-</body>
-</html>
+In this article we have covered C# record type.  
