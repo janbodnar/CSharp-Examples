@@ -1,8 +1,4 @@
-# C# string
-
-In this article we show how to work with strings in C#.
-
-## Understanding C# Strings
+# C# strings
 
 A string in C# represents a sequence of characters encoded using UTF-16.  
 It is a fundamental data type that stores a series of characters according  
@@ -33,7 +29,7 @@ involves more advanced operations.
 There are multiple ways of creating strings, both immutable and mutable.  
 We show a few of them.
 
-**Program.cs**
+
 
 ```csharp
 using System.Text;
@@ -118,7 +114,7 @@ might contain interpolated expressions.
 String formatting is a similar feature to string interpolation; it is  
 covered later in the chapter.
 
-**Program.cs**
+
 
 ```csharp
 int age = 23;
@@ -156,7 +152,7 @@ Regular strings can contain escape sequences, such as new line or tab
 character, which are interpreted. Regular strings are placed between a  
 pair of double quotes.
 
-**Program.cs**
+
 
 ```csharp
 string s1 = "deep \t forest";
@@ -191,7 +187,7 @@ Verbatim strings do not interprete escape sequences. Verbatim strings are
 preceded with the `@` character. Verbatim strings can be used to work  
 with multiline strings.
 
-**Program.cs**
+
 
 ```csharp
 Console.WriteLine(@"deep \t forest");
@@ -249,7 +245,7 @@ Strings are objects. They are reference types. Strings are instances of
 the `System.String` or `System.Text.StringBuilder` class. Since they are  
 objects, they have multiple methods available for doing various work.
 
-**Program.cs**
+
 
 ```csharp
 string lang = "Java";
@@ -332,7 +328,7 @@ The `String` is a sequence of immutable characters, while the
 `StringBuilder` is a sequence of mutable characters. The next example  
 shows the difference.
 
-**Program.cs**
+
 
 ```csharp
 using System.Text;
@@ -390,7 +386,7 @@ from any number of other strings.
 It is also possible to concatenate strings using string formatting and  
 interpolation.
 
-**Program.cs**
+
 
 ```csharp
 using System.Text;
@@ -464,7 +460,7 @@ Return of the king.
 When we want to display quotes, for instance in direct speech, the inner  
 quotes must be escaped.
 
-**Program.cs**
+
 
 ```csharp
 Console.WriteLine("There are many stars.");
@@ -509,7 +505,7 @@ where you are heading."
 
 We can compare two strings with the `==` operator.
 
-**Program.cs**
+
 
 ```csharp
 Console.WriteLine("12" == "12");
@@ -533,7 +529,7 @@ second. If it returns zero, both strings are equal. Finally, if the
 returned value is greater than zero, the first string is greater than  
 the second.
 
-**Program.cs**
+
 
 ```csharp
 string str1 = "ZetCode";
@@ -558,7 +554,7 @@ Console.WriteLine(string.Compare(str1, str2, true));
 A string is a sequence of characters. A character is a basic element of  
 a string.
 
-**Program.cs**
+
 
 ```csharp
 char[] crs = ['Z', 'e', 't', 'C', 'o', 'd', 'e'];
@@ -651,7 +647,7 @@ e
 
 In the second example, we work with the elements of a mutable string.
 
-**Program.cs**
+
 
 ```csharp
 using System.Text;
@@ -718,7 +714,7 @@ The misty mountains
 
 The `Join` joins strings and the `Split` splits the strings.
 
-**Program.cs**
+
 
 ```csharp
 string[] items = ["C#", "Visual Basic", "Java", "Perl"];
@@ -780,7 +776,7 @@ Perl
 The `StartsWith` method determines whether this string instance starts  
 with the specified character.
 
-**Program.cs**
+
 
 ```csharp
 var words = "club\nsky\nblue\ncup\ncoin\nnew\ncent\nowl\nfalcon\nwar\nice";
@@ -814,7 +810,7 @@ cent
 The `EndsWith` determines whether the end of this string instance matches  
 a specified string.
 
-**Program.cs**
+
 
 ```csharp
 var words = "club\nsky\nblue\ncup\ncoin\nnew\ncent\nowl\nfalcon\nwar\nice";
@@ -847,7 +843,7 @@ The `ToUpper` method converts all of the characters of the string to
 upper case. The `ToLower` method converts all of the characters of the  
 string to lower case.
 
-**Program.cs**
+
 
 ```csharp
 var word1 = "Cherry";
@@ -885,7 +881,7 @@ by the `System.Text.Rune` type, which corresponds to a single Unicode
 scalar value, enabling efficient handling of text containing characters  
 from diverse alphabets, symbols, or emojis.
 
-**Program.cs**
+
 
 ```csharp
 var text = "🐄🦙🐘🐫🐑🦝🦍🐯";
@@ -919,7 +915,7 @@ $ dotnet run
 The `Remove` method returns a new string in which a specified number of  
 characters from the current string are deleted.
 
-**Program.cs**
+
 
 ```csharp
 var text = "Did you go there? We did, but we had a \"great\" service there.";
@@ -995,7 +991,7 @@ there
 
 The `Substring` method retrieves a substring from a string.
 
-**Program.cs**
+
 
 ```csharp
 var word = "bookcase";
@@ -1041,7 +1037,7 @@ which reads the same backward as forward, such as madam or racecar.
 There are many ways to check if a string is a palindrome. The following  
 example is one of the possible solutions.
 
-**Program.cs**
+
 
 ```csharp
 Console.WriteLine(isPalindrome("radar"));
@@ -1116,7 +1112,7 @@ specified string. The `Clone` method returns a reference to the string
 which is being cloned. It is not an independent copy of the string on  
 the Heap. It is another reference on the same string.
 
-**Program.cs**
+
 
 ```csharp
 string str = "ZetCode";
@@ -1189,7 +1185,7 @@ The formatString is optional. It is a string that formats a value is a
 specific way. It can be used to format dates, times, numbers or  
 enumerations.
 
-**Program.cs**
+
 
 ```csharp
 int oranges = 2;
@@ -1237,7 +1233,7 @@ There are 2 oranges, 3 bananas and 4 apples
 
 The next example formats numeric data.
 
-**Program.cs**
+
 
 ```csharp
 Console.WriteLine("{0}  {1, 12}", "Decimal", "Hexadecimal");
@@ -1275,7 +1271,7 @@ Decimal   Hexadecimal
 
 The last two examples format numeric and date data.
 
-**Program.cs**
+
 
 ```csharp
 Console.WriteLine(string.Format("Number: {0:N}", 126));
@@ -1300,7 +1296,7 @@ Hexadecimal: 7E
 
 Finally, we format date and time data.
 
-**Program.cs**
+
 
 ```csharp
 DateTime today = DateTime.Now;
@@ -1334,7 +1330,7 @@ removes whitespace from the beginning and `TrimEnd` removes whitespace
 from the end. These methods return a new string with the specified  
 characters removed, leaving the original string unchanged.
 
-**Program.cs**
+
 
 ```csharp
 string input = "   hello there   ";
@@ -1364,7 +1360,7 @@ the sort order. A negative value indicates that the first string precedes
 the second string, zero indicates that they are equal, and a positive  
 value indicates that the first string follows the second string.
 
-**Program.cs**
+
 
 ```csharp
 string a = "straße";
@@ -1394,7 +1390,7 @@ parameters: the substring to replace and the new substring to insert.
 Both methods return a new string with the specified modifications,  
 leaving the original string unchanged.
 
-**Program.cs**
+
 
 ```csharp
 string text = "The quick brown fox jumps over the lazy dog.";
@@ -1424,7 +1420,7 @@ padding is added. These methods are useful for formatting strings for
 display, such as aligning text in a table or ensuring consistent widths  
 for output.
 
-**Program.cs**
+
 
 ```csharp
 string word = "42";
@@ -1453,7 +1449,7 @@ sensitivity of the search. The `IndexOf` and `LastIndexOf` methods can
 also take additional parameters to specify the starting index and the  
 number of characters to search within.
 
-**Program.cs**
+
 
 ```csharp
 string phrase = "abracadabra";
