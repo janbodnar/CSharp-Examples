@@ -82,7 +82,7 @@ List<string> words = ["forest", "oak", "river", "falcon"];
 Console.WriteLine(string.Join(", ", words));
 ```
 
-The elements of the list are placed inside a pair of square brackets (`[]`). 
+The elements of the list are placed inside a pair of square brackets (`[]`).  
 This syntax is shared by many programming languages.
 
 ## C# List count elements
@@ -109,7 +109,7 @@ There are 6 elements in the list
 
 ## C# List access elements
 
-Elements of a list can be accessed using the index notation `[]`. The index is 
+Elements of a list can be accessed using the index notation `[]`. The index is  
 zero-based.
 
 ```csharp
@@ -130,8 +130,7 @@ The example prints the first, second, and the last element of the list.
 Console.WriteLine(vals.Count - 1);
 ```
 
-To get the last element of the list, we count the number of elements and divide 
-one.
+To get the last element of the list, we count the number of elements and divide one.
 
 ```csharp
 Console.WriteLine(vals[^1]);
@@ -151,7 +150,7 @@ $ dotnet run
 
 ## C# List add elements
 
-The `Add` method adds an element at the end of the list. The `AddRange` methods 
+The `Add` method adds an element at the end of the list. The `AddRange` methods  
 adds the elements of the specified collection to the end of the list.
 
 ```csharp
@@ -189,8 +188,8 @@ forest,oak,river,falcon,sky,ocean,owl,hawk
 
 ## C# List insert elements
 
-The `Insert` method inserts an element into the list at the specified index. 
-The `InsertRange` inserts the elements of a collection into the list at the 
+The `Insert` method inserts an element into the list at the specified index.  
+The `InsertRange` inserts the elements of a collection into the list at the  
 specified index.
 
 ```csharp
@@ -258,9 +257,10 @@ nums.RemoveAll(e => e < 0);
 Console.WriteLine(string.Join(", ", nums));
 ```
 
-With `RemoveAll` method, we remove all elements that satisfy the
+With `RemoveAll` method, we remove all elements that satisfy the  
 given predicate; in our case, we remove all negative values.
 
+```csharp
 nums.Remove(0);
 ```
 
@@ -728,6 +728,7 @@ var sortedUsers = users.OrderBy(u => u.LastName).ThenBy(u => u.Salary);
 We sort the users by their last names and then by their salaries in ascending
 order.
 
+```csharp
 var sortedUsers2 = users.OrderByDescending(u => u.LastName)
     .ThenByDescending(u => u.Salary);
 ```
@@ -769,17 +770,15 @@ var unique = nums.Distinct().ToList();
 Console.WriteLine(string.Join(", ", unique));
 ```
 
-This example removes duplicate elements from a list using the `Distinct`
-method from LINQ. The resulting list contains only unique values from the
-original
-list.
+This example removes duplicate elements from a list using the `Distinct`  
+method from LINQ. The resulting list contains only unique values from the  
+original list.
 
 ## C# List capacity and TrimExcess
 
-The `Capacity` property gets or sets the number of elements that the
-`List` can contain. The `TrimExcess` method sets the
-capacity to the actual number of elements in the list, if that number is less
-than 90% of current capacity.
+The `Capacity` property gets or sets the number of elements that the  
+`List` can contain. The `TrimExcess` method sets the capacity to the actual  
+number of elements in the list, if that number is less than 90% of current capacity.
 
 ```csharp
 List<int> vals = new List<int>(100);
@@ -791,16 +790,16 @@ vals.TrimExcess();
 Console.WriteLine($"Trimmed capacity: {vals.Capacity}");
 ```
 
-This example shows how to check and set the capacity of a list. The
-`TrimExcess` method reduces the capacity to match the actual number
-of elements, which can help optimize memory usage.
+This example shows how to check and set the capacity of a list. The  
+`TrimExcess` method reduces the capacity to match the actual number  
+of elements, which can help optimize memory usage.  
 
 ## C# List binary search
 
-The `BinarySearch` method searches the sorted list for a specified
-element and returns the zero-based index of the element in the list. If the
-element is not found, a negative number is returned. The list must be sorted
-before calling this method.
+The `BinarySearch` method searches the sorted list for a specified  
+element and returns the zero-based index of the element in the list. If the  
+element is not found, a negative number is returned. The list must be sorted  
+before calling this method.  
 
 ```csharp
 List<int> nums = [1, 3, 5, 7, 9];
@@ -810,7 +809,7 @@ Console.WriteLine(idx); // prints 2
 ```
 
 This example demonstrates how to use the `BinarySearch` method to   
-find the index of an element in a sorted list. If the element is found, its  
+find the index of an element in a sorted list. If the element is found, its   
 index is returned; otherwise, a negative number is returned.  
 
 ## C# List ConvertAll: string to int
