@@ -989,62 +989,6 @@ println '---------------------------'
 println tbl.sortAscendingOn("price")
 ```
 
-## Swing example
-
-The first example uses Swing directly, without the builder.
-
-```groovy
-package com.zetcode
-
-import javax.swing.GroupLayout
-import javax.swing.JButton
-import javax.swing.JComponent
-import javax.swing.JFrame
-import java.awt.EventQueue
-
-class QuitButtonEx extends JFrame {
-
-    QuitButtonEx() {
-
-        initUI()
-    }
-
-    def initUI() {
-
-        def quitButton = new JButton("Quit")
-        quitButton.addActionListener { e -> System.exit(0) }
-
-        createLayout(quitButton)
-
-        setTitle("Quit button")
-        setSize(350, 250)
-        setLocationRelativeTo(null)
-        setDefaultCloseOperation(EXIT_ON_CLOSE)
-    }
-
-    private void createLayout(JComponent... arg) {
-
-        def pane = getContentPane()
-        def gl = new GroupLayout(pane)
-        pane.setLayout(gl)
-
-        gl.setAutoCreateContainerGaps(true)
-
-        gl.setHorizontalGroup(gl.createSequentialGroup()
-                .addComponent(arg[0]))
-
-        gl.setVerticalGroup(gl.createSequentialGroup()
-                .addComponent(arg[0]))
-    }
-}
-
-
-EventQueue.invokeLater {
-
-    def ex = new QuitButtonEx()
-    ex.setVisible(true)
-}
-```
 
 ## Playwright  
 
@@ -1257,48 +1201,4 @@ println res
 
 Records are not working, we use `@Immutable` instead.  
 
-## JasperReports simple example
 
-```xml
-<?xml version = "1.0" encoding = "UTF-8"?>
-<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN"
-        "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
-
-<jasperReport xmlns = "http://jasperreports.sourceforge.net/jasperreports"
-              xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation = "http://jasperreports.sourceforge.net/jasperreports
-                                    http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
-              name="simple" topMargin="20" bottomMargin="20">
-
-    <detail>
-        <band height="70">
-
-            <staticText>
-                <reportElement x="5" y="50" width="100" height="14"/>
-                <textElement />
-                <text><![CDATA[This is my first report!]]></text>
-            </staticText>
-
-        </band>
-    </detail>
-
-</jasperReport>
-```
-`simple.jrxml` file  
-
-```groovy
-@Grab(group='net.sf.jasperreports', module='jasperreports', version='6.17.0')
-
-import net.sf.jasperreports.engine.*
-
-def xmlFile = 'simple.jrxml'
-def jreport = JasperCompileManager.compileReport(xmlFile)
-
-def params = [:]
-def jsPrint = JasperFillManager.fillReport(jreport, params,
-        new JREmptyDataSource())
-
-JasperExportManager.exportReportToPdfFile(jsPrint, 'simple.pdf')
-```
-
-`report2.gvy` file  
