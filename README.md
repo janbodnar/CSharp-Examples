@@ -42,6 +42,29 @@ jar {
 }
 ```
 
+C# equivalent - Creating executable applications with dotnet:
+
+```xml
+<!-- In .csproj file -->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  </PropertyGroup>
+</Project>
+```
+
+```bash
+# Command to create self-contained executable
+dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true
+
+# Cross-platform executable
+dotnet publish -c Release -r linux-x64 --self-contained true /p:PublishSingleFile=true
+```
+
 ## def keyword
 
 With `def` variables act like they are of type Object, so they can be reassigned to different types.  
@@ -52,6 +75,21 @@ println x.getClass().getName()
 
 x = 'falcon'
 println x.getClass().getName()
+```
+
+C# equivalent using `var` for type inference and `object` for dynamic typing:
+
+```csharp
+// Using var - type is inferred at compile time and cannot be reassigned to different types
+var x = 12;
+Console.WriteLine(x.GetType().Name); // Int32
+
+// Using object - allows reassignment to different types
+object y = 12;
+Console.WriteLine(y.GetType().Name); // Int32
+
+y = "falcon";
+Console.WriteLine(y.GetType().Name); // String
 ```
 
 ## System properties
@@ -66,6 +104,18 @@ println System.getProperty("java.class.path")
 println System.currentTimeMillis()
 ```
 
+C# equivalent using Environment class:
+
+```csharp
+Console.WriteLine(Environment.Version); // .NET version instead of Java vendor
+Console.WriteLine(Environment.Is64BitOperatingSystem ? "x64" : "x86"); // OS architecture
+Console.WriteLine(Environment.OSVersion.Platform); // OS platform
+Console.WriteLine(Environment.Version); // .NET version instead of Java class version
+Console.WriteLine(Environment.CurrentDirectory); // Current directory instead of class path
+
+Console.WriteLine(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()); // Current time in milliseconds
+```
+
 ## Environment variables 
 
 ```groovy
@@ -77,6 +127,25 @@ println '------------------------'
 
 def env = System.getenv().collect { k, v -> "$k=$v" }
 env.each { e -> println e }
+```
+
+C# equivalent using Environment class:
+
+```csharp
+Console.WriteLine(Environment.GetEnvironmentVariable("DOTNET_ROOT"));
+Console.WriteLine(Environment.GetEnvironmentVariable("HOME")); // or "USERPROFILE" on Windows
+Console.WriteLine(Environment.GetEnvironmentVariable("PATH"));
+
+Console.WriteLine("------------------------");
+
+var env = Environment.GetEnvironmentVariables()
+    .Cast<DictionaryEntry>()
+    .Select(e => $"{e.Key}={e.Value}");
+
+foreach (var e in env)
+{
+    Console.WriteLine(e);
+}
 ```
 
 ## Multiple assignments
@@ -106,6 +175,28 @@ println month
 println year
 ```
 
+C# equivalent using tuple deconstruction:
+
+```csharp
+// Basic tuple deconstruction
+var (name1, name2, name3) = ("John Doe", "Roger Roe", "Lucia Smith");
+Console.WriteLine(name1);
+Console.WriteLine(name2);
+Console.WriteLine(name3);
+
+// Typed variables
+var (x, y, w) = (10, 20, "falcon");
+Console.WriteLine(x); // int
+Console.WriteLine(y); // int  
+Console.WriteLine(w); // string
+
+// Discard operator
+var parts = "3rd August 2023".Split();
+var (_, month, year) = (parts[0], parts[1], parts[2]);
+Console.WriteLine(month);
+Console.WriteLine(year);
+```
+
 
 ## Primitive types are auto-wrapped
 
@@ -117,6 +208,23 @@ println n.getClass().isPrimitive()
 float m = 4.4;
 println m.getClass().getName()
 println m.getClass().isPrimitive()
+```
+
+C# equivalent demonstrating boxing and value types:
+
+```csharp
+int n = 3;
+Console.WriteLine(n.GetType().Name); // Int32
+Console.WriteLine(n.GetType().IsValueType); // True (value types in C#)
+
+float m = 4.4f;
+Console.WriteLine(m.GetType().Name); // Single
+Console.WriteLine(m.GetType().IsValueType); // True
+
+// Boxing example
+object boxedInt = n; // Boxing happens here
+Console.WriteLine(boxedInt.GetType().Name); // Int32
+Console.WriteLine(boxedInt.GetType().IsValueType); // True (type info preserved)
 ```
 
 ## Import Groovy code in script
@@ -163,6 +271,21 @@ def ri = rnd.nextInt(words.size())
 println words[ri]
 ```
 
+C# equivalent:
+
+```csharp
+var words = new[] {"sky", "cup", "tall", "falcon", "cloud"};
+
+var rnd = new Random();
+
+var ri = rnd.Next(words.Length);
+Console.WriteLine(words[ri]);
+
+// Alternative using LINQ (more concise)
+var randomWord = words.OrderBy(x => rnd.Next()).First();
+Console.WriteLine(randomWord);
+```
+
 
 ## Unix pipes
 
@@ -180,6 +303,18 @@ import java.nio.file.Paths
 
 def data = "http://webcode.me/favicon.ico".toURL().bytes
 Files.write(Paths.get('favicon.ico'), data)
+```
+
+C# equivalent using HttpClient:
+
+```csharp
+using var httpClient = new HttpClient();
+var data = await httpClient.GetByteArrayAsync("http://webcode.me/favicon.ico");
+await File.WriteAllBytesAsync("favicon.ico", data);
+
+// Synchronous version
+var dataSync = httpClient.GetByteArrayAsync("http://webcode.me/favicon.ico").Result;
+File.WriteAllBytes("favicon.ico", dataSync);
 ```
 
 ## Iterate runes
@@ -200,6 +335,34 @@ while (start < end) {
     println(text.substring(start, end))
     start = end 
     end = it.next()
+}
+```
+
+C# equivalent using StringInfo or direct string enumeration:
+
+```csharp
+using System.Globalization;
+
+var text = "🐜🐬🐄🐘🦂🐫🐑🦍🐯🐞";
+
+// Method 1: Using StringInfo
+var stringInfo = new StringInfo(text);
+for (int i = 0; i < stringInfo.LengthInTextElements; i++)
+{
+    Console.WriteLine(stringInfo.SubstringByTextElements(i, 1));
+}
+
+// Method 2: Using TextElementEnumerator  
+var enumerator = StringInfo.GetTextElementEnumerator(text);
+while (enumerator.MoveNext())
+{
+    Console.WriteLine(enumerator.Current);
+}
+
+// Method 3: Using Rune (C# 8+)
+foreach (var rune in text.EnumerateRunes())
+{
+    Console.WriteLine(rune.ToString());
 }
 ```
 
@@ -320,6 +483,20 @@ res = vals.grep { it != 15 || it != 16 }.collect { it * it }.sum()
 println res
 ```
 
+C# equivalent using LINQ method chaining:
+
+```csharp
+var vals = new[] {1, 15, 16, 30, 12};
+
+// Filter values between 12 and 18, then sum
+var res = vals.Where(x => x >= 12 && x <= 18).Sum();
+Console.WriteLine(res); // 43 (15 + 16 + 12)
+
+// Filter values, square them, then sum  
+res = vals.Where(x => x != 15 && x != 16).Select(x => x * x).Sum();
+Console.WriteLine(res); // 1045 (1² + 30² + 12² = 1 + 900 + 144)
+```
+
 ## Spaceship operator 
 
 ```groovy
@@ -397,6 +574,34 @@ res = words.grep(['cup', 'wood', 'car'])
 println res
 ```
 
+C# equivalent using LINQ filtering:
+
+```csharp
+// Filter values in range
+var res = new[] {1, 15, 16, 30, 12}.Where(x => x >= 12 && x <= 18).ToArray();
+Console.WriteLine($"[{string.Join(", ", res)}]"); // [15, 16, 12]
+
+// Filter positive values
+var res2 = new[] {1, 2, -1, 0, 2, 3, -3, 4}.Where(x => x > 0).ToArray();
+Console.WriteLine($"[{string.Join(", ", res2)}]"); // [1, 2, 2, 3, 4]
+
+// Filter by regex (3 characters)
+var words = new[] {"sky", "cloud", "war", "wasp", "water", "coin"};
+var res3 = words.Where(w => w.Length == 3).ToArray();
+Console.WriteLine($"[{string.Join(", ", res3)}]"); // [sky, war]
+
+// Filter by type
+object[] data = {true, "sky", 1.2, 0, new decimal(4), new[] {1, 2, 3}};
+var res4 = data.OfType<decimal>().ToArray(); // Filter for decimal numbers
+Console.WriteLine($"[{string.Join(", ", res4)}]"); // [4]
+
+// Filter by contains (intersection)
+var words2 = new[] {"key", "cup", "cloud", "storm", "wood"};
+var filter = new[] {"cup", "wood", "car"};
+var res5 = words2.Where(w => filter.Contains(w)).ToArray();
+Console.WriteLine($"[{string.Join(", ", res5)}]"); // [cup, wood]
+```
+
 
 ```groovy
 def gcd(a,b) {
@@ -405,6 +610,18 @@ def gcd(a,b) {
 }
 ```
 Custom GCD with recursion
+
+C# equivalent:
+
+```csharp
+static int Gcd(int a, int b)
+{
+    return b == 0 ? a : Gcd(b, a % b);
+}
+
+// Usage
+Console.WriteLine(Gcd(48, 18)); // 6
+```
 
 ## Filter lines
 
@@ -450,6 +667,56 @@ println "--------------------------------"
 println c2.execute().text
 ```
 Runs Perl one liners  
+
+C# equivalent using Process class:
+
+```csharp
+using System.Diagnostics;
+
+// Run external program and read output
+var process = new Process
+{
+    StartInfo = new ProcessStartInfo
+    {
+        FileName = "ls",
+        Arguments = "-l",
+        RedirectStandardOutput = true,
+        UseShellExecute = false,
+        CreateNoWindow = true
+    }
+};
+
+process.Start();
+string output = process.StandardOutput.ReadToEnd();
+process.WaitForExit();
+
+Console.WriteLine(output);
+
+// Run commands and get output
+static string RunCommand(string command, string arguments = "")
+{
+    var process = new Process
+    {
+        StartInfo = new ProcessStartInfo
+        {
+            FileName = command,
+            Arguments = arguments,
+            RedirectStandardOutput = true,
+            UseShellExecute = false,
+            CreateNoWindow = true
+        }
+    };
+    
+    process.Start();
+    string result = process.StandardOutput.ReadToEnd();
+    process.WaitForExit();
+    return result;
+}
+
+Console.WriteLine(RunCommand("dotnet", "--version"));
+Console.WriteLine("--------------------------------");
+Console.WriteLine(RunCommand("echo", "Hello there!"));
+```  
 
 ## Grouping
 
@@ -512,6 +779,35 @@ for (e in res) {
 }
 ```
 
+C# equivalent using records (C# 9+):
+
+```csharp
+using System;
+using System.Linq;
+
+// C# record declaration
+record User(string Name, string Occupation, DateTime Dob);
+
+var users = new[]
+{
+    new User("John Doe", "gardener", DateTime.Parse("1973-09-07")),
+    new User("Roger Roe", "driver", DateTime.Parse("1963-03-30")),
+    new User("Kim Smith", "teacher", DateTime.Parse("1980-05-12")),
+    new User("Joe Nigel", "artist", DateTime.Parse("1983-03-30")),
+    new User("Liam Strong", "teacher", DateTime.Parse("2009-03-06")),
+    new User("Robert Young", "gardener", DateTime.Parse("1978-11-16")),
+    new User("Liam Strong", "teacher", DateTime.Parse("1986-10-23"))
+};
+
+// Group by occupation using LINQ
+var res = users.GroupBy(u => u.Occupation);
+
+foreach (var group in res)
+{
+    Console.WriteLine($"{group.Key}: [{string.Join(", ", group.Select(u => u.Name))}]");
+}
+```
+
 
 
 ## Find GCD from the max & min in a list 
@@ -535,6 +831,30 @@ def max = vals.max()
 println min.gcd(max)
 ```
 Using BigInteger literals
+
+C# equivalent using System.Numerics.BigInteger:
+
+```csharp
+using System.Numerics;
+
+var vals = new[] {8, 5, 10};
+
+var min = new BigInteger(vals.Min());
+var max = new BigInteger(vals.Max());
+
+Console.WriteLine(BigInteger.GreatestCommonDivisor(min, max)); // 1
+
+// Using BigInteger directly
+var bigVals = new[] {new BigInteger(8), new BigInteger(5), new BigInteger(10)};
+var bigMin = bigVals.Min();
+var bigMax = bigVals.Max(); 
+
+Console.WriteLine(BigInteger.GreatestCommonDivisor(bigMin, bigMax)); // 1
+
+// For regular integers, you can also use:
+static int Gcd(int a, int b) => b == 0 ? a : Gcd(b, a % b);
+Console.WriteLine(Gcd(vals.Max(), vals.Min())); // 1
+```
 
 ## Read CSV file
 
@@ -780,6 +1100,40 @@ f.withWriterAppend('utf-8') {
 }
 ```
 append to file  
+
+C# equivalent using File class methods:
+
+```csharp
+// Read file line by line
+var lines = File.ReadAllLines("words.txt");
+for (int i = 0; i < lines.Length; i++)
+{
+    Console.WriteLine($"line {i + 1}: {lines[i]}");
+}
+
+// Alternative: enumerate lines with index
+foreach (var (line, index) in File.ReadLines("words.txt").Select((line, i) => (line, i + 1)))
+{
+    Console.WriteLine($"line {index}: {line}");
+}
+
+// Filter lines that start with 'w'
+var filteredLines = File.ReadLines("words.txt")
+    .Where(line => line.StartsWith("w"))
+    .ToArray();
+Console.WriteLine($"[{string.Join(", ", filteredLines)}]");
+
+// Read entire file content
+var content = File.ReadAllText("words.txt");
+Console.WriteLine(content);
+
+// Read all lines into array
+var allLines = File.ReadAllLines("words.txt");
+Console.WriteLine($"[{string.Join(", ", allLines)}]");
+
+// Append to file
+File.AppendAllText("words.txt", "falcon\nowl\n");
+```  
 
 ## Undertow server 
 
