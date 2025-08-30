@@ -1,6 +1,7 @@
 # C# Arrays
 
-This tutorial covers C# arrays - ordered collections of elements of the same type. Arrays are fundamental data structures in C# that allow you to store multiple values in a single variable.
+This tutorial covers C# arrays - ordered collections of elements of the same type. Arrays are fundamental 
+data structures in C# that allow you to store multiple values in a single variable.
 
 ## Array Declaration and Initialization
 
