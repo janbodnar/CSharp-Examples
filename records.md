@@ -1,10 +1,6 @@
 
 # C# record
 
-*last modified July 5, 2023*
-
-C# record tutorial shows how to work with the record type in C#.  
-
 A record is a reference type whose main purpose is to hold data. It is very  
 useful for data analysis. The record type simplifies code and improves its  
 readability, and removes unnecessary boilerplate.  
@@ -399,4 +395,3 @@ In the example, we scrape data from a website. In the HTML table, there are
 and pick three of its columns. The parsed data is saved into a CSV file.  
 The example creates the `Row` record, which stores one row of the parsed data.  
 
-In this article we have covered C# record type.  
