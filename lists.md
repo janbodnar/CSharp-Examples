@@ -1,282 +1,127 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>C# List - working with a List collection in C#</title>
-<link rel="stylesheet" href="/cfg/style.css" type="text/css">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" content=<meta name="keywords" content="C# List tutorial,
-C# collections, List in C#, .NET generics, List methods in C#, sort List in C#,
-search List in C#, C# data structures, learn C# programming, C# List vs array">
-<meta name="description" content="Learn how to work with the List collection in
-C#. This tutorial covers List manipulation, indexing, sorting, searching, and
-common operations for handling data efficiently using .NET collections.">
-<meta name="author" content="Jan Bodnar">
+# C# List
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9706709751191532"
-     crossorigin="anonymous"></script>
-</head>
+*last modified May 14, 2025*
 
-<body>
+This article provides a comprehensive guide on working with the `List` 
+collection in C#. Learn how to efficiently store, manage, and manipulate 
+dynamic lists in your applications.
 
-<header>
+## C# List
 
-<div>
-<a href="/" title="Home">ZetCode</a>
-</div>
+The `List` class in C# represents a strongly typed, resizable collection of 
+objects that can be accessed via index. It offers powerful methods for 
+searching, sorting, filtering, and modifying list elements dynamically, making 
+it an essential tool for handling structured data.
 
-<nav>
-  <a title="All tutorials" href="/all/">All</a>
-  <a title="Go tutorials" href="/golang/">Golang</a>
-  <a title="Python tutorials" href="/python/">Python</a>
-  <a title="C# tutorials" href="/csharp/">C#</a>
-  <a title="Java tutorials" href="/java/">Java</a>
-  <a title="JavaScript tutorials" href="/javascript/">JavaScript</a>
-  <a title="Subscribe to ZetCode news" href="http://zetcode.us13.list-manage.com/subscribe?u=9def9ccd4c70dbbaf691f90fc&id=6556210f80">Subscribe</a>
-</nav>
-
-</header>
-
-<div class="container">
-
-<div class="ltow">
-
-<div id="ebooks">
-
-<h2 class="blu">Ebooks</h2>
-
-<ul>
-<li><a href="/ebooks/advancedpyqt5/">PyQt5 ebook</a></li>
-<li><a href="/ebooks/tkinter/">Tkinter ebook</a></li>
-<li><a href="/ebooks/sqlitepython/">SQLite Python</a></li>
-<li><a href="/ebooks/advancedwxpython/">wxPython ebook</a></li>
-<li><a href="/ebooks/windowsapi/">Windows API ebook</a></li>
-<li><a href="/ebooks/advancedjavaswing/">Java Swing ebook</a></li>
-<li><a href="/ebooks/javagames/">Java games ebook</a></li>
-<li><a href="/ebooks/mysqljava/">MySQL Java ebook</a></li>
-</ul>
-
-</div>
-
-</div>
-
-
-<div class="content">
-<h1>C# List</h1>
-
-<p class="last_mod">
-last modified May 14, 2025
-</p>
- 
-<p>
-This article provides a comprehensive guide on working with the
-<code>List</code> collection in C#. Learn how to efficiently store, manage, and
-manipulate dynamic lists in your applications.
-</p>
-
-<h2>C# List</h2>
-
-<p>
-The <code>List</code> class in C# represents a strongly typed, resizable
-collection of objects that can be accessed via index. It offers powerful methods
-for searching, sorting, filtering, and modifying list elements dynamically,
-making it an essential tool for handling structured data.
-</p>
-
-
-<p>
 Key Features of the List class:
-</p>
 
-<ul>
-    <li><strong>Dynamic Sizing:</strong> Lists automatically expand when new
-    elements are added and contract when elements are removed.</li>
-    <li><strong>Index-Based Access:</strong> Elements can be accessed directly
-    using zero-based indexing.</li>
-    <li><strong>Generic Type Support:</strong> Lists are strongly typed using
-    generics, ensuring type safety.</li>
-    <li><strong>Versatile Methods:</strong> Built-in methods simplify common
-    operations such as sorting, searching, filtering, and modifying
-    elements.</li>
-    <li><strong>Efficient Performance:</strong> Optimized for fast insertion,
-    deletion, and iteration compared to arrays in certain scenarios.</li>
-</ul>
+- **Dynamic Sizing:** Lists automatically expand when new elements are added 
+  and contract when elements are removed.
+- **Index-Based Access:** Elements can be accessed directly using zero-based 
+  indexing.
+- **Generic Type Support:** Lists are strongly typed using generics, ensuring 
+  type safety.
+- **Versatile Methods:** Built-in methods simplify common operations such as 
+  sorting, searching, filtering, and modifying elements.
+- **Efficient Performance:** Optimized for fast insertion, deletion, and 
+  iteration compared to arrays in certain scenarios.
 
-<h3>Common Methods and Operations</h3>
+### Common Methods and Operations
 
-<p>
-The List class provides a variety of methods for manipulating lists. 
-Here are some of the most commonly used methods:
-</p>
+The List class provides a variety of methods for manipulating lists. Here are 
+some of the most commonly used methods:
 
-<table>
-    <thead>
-        <tr>
-            <th>Method</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>Add(T item)</code></td>
-            <td>Adds an element to the end of the list.</td>
-        </tr>
-        <tr>
-            <td><code>Insert(int index, T item)</code></td>
-            <td>Inserts an element at a specified index.</td>
-        </tr>
-        <tr>
-            <td><code>Remove(T item)</code></td>
-            <td>Removes the first occurrence of a specified item.</td>
-        </tr>
-        <tr>
-            <td><code>RemoveAt(int index)</code></td>
-            <td>Removes an element at a specified index.</td>
-        </tr>
-        <tr>
-            <td><code>Contains(T item)</code></td>
-            <td>Checks if an element exists in the list.</td>
-        </tr>
-        <tr>
-            <td><code>IndexOf(T item)</code></td>
-            <td>Gets the index of the first occurrence of a specified item.</td>
-        </tr>
-        <tr>
-            <td><code>Sort</code></td>
-            <td>Sorts the list in ascending order.</td>
-        </tr>
-        <tr>
-            <td><code>Reverse</code></td>
-            <td>Reverses the order of the list.</td>
-        </tr>
-        <tr>
-            <td><code>Clear</code></td>
-            <td>Removes all elements from the list.</td>
-        </tr>
-        <tr>
-            <td><code>Count</code></td>
-            <td>Returns the number of elements in the list.</td>
-        </tr>
-    </tbody>
-</table>
+| Method | Description |
+|--------|-------------|
+| `Add(T item)` | Adds an element to the end of the list. |
+| `Insert(int index, T item)` | Inserts an element at a specified index. |
+| `Remove(T item)` | Removes the first occurrence of a specified item. |
+| `RemoveAt(int index)` | Removes an element at a specified index. |
+| `Contains(T item)` | Checks if an element exists in the list. |
+| `IndexOf(T item)` | Gets the index of the first occurrence of a specified item. |
+| `Sort` | Sorts the list in ascending order. |
+| `Reverse` | Reverses the order of the list. |
+| `Clear` | Removes all elements from the list. |
+| `Count` | Returns the number of elements in the list. |
 
-<p>
-These methods make the <code>List</code> class a versatile data structure for
-handling dynamic collections in C#. Whether you need to add, remove, or reorder
-elements, these built-in functionalities provide an efficient way to manage
-lists without manual memory allocation or complex operations. 
-</p>
+These methods make the `List` class a versatile data structure for handling 
+dynamic collections in C#. Whether you need to add, remove, or reorder 
+elements, these built-in functionalities provide an efficient way to manage 
+lists without manual memory allocation or complex operations.
 
-<h2>C# List initializer</h2>
+## C# List initializer
 
-<p>
-C# lists can be initialized with literal notation. The elements
-are added on the right side of the assignment inside <code>{}</code>
-brackets.
-</p>
+C# lists can be initialized with literal notation. The elements are added on 
+the right side of the assignment inside `{}` brackets.
 
-<div class="codehead">Program.cs
-  <i class="fas fa-copy copy-icon" onclick="copyCode(this)"></i>
-</div>
-<pre class="code">
-var words = new List&lt;string&gt; { "forest", "oak", "river", "falcon" };
+```csharp
+var words = new List<string> { "forest", "oak", "river", "falcon" };
 Console.WriteLine(string.Join(", ", words));
-</pre>
+```
 
-<p>
 In the example, we create a list of strings with list initializer.
-</p>
 
-<pre class="explanation">
-var words = new List&lt;string&gt;{"forest", "oak", "river", "falcon"};
-</pre>
+```csharp
+var words = new List<string>{"forest", "oak", "river", "falcon"};
+```
 
-<p>
-A new list is created. Between the angle brackets (<code>&lt;&gt;</code>),
-we specify the data type of the list elements.
-</p>
+A new list is created. Between the angle brackets (`<>`), we specify the data 
+type of the list elements.
 
-<pre class="explanation">
+```csharp
 Console.WriteLine(string.Join(", ", words));
-</pre>
+```
 
-<p>
-To get a quick look at the contents of the list, we join all the values into
-a string, separated by comma.
-</p>
+To get a quick look at the contents of the list, we join all the values into a 
+string, separated by comma.
 
-<pre class="compact">
+```
 $ dotnet run
 forest, oak, river, falcon
-</pre>
+```
 
+## C# List collection expression
 
-<h2>C# List collection expression</h2>
-
-<p>
 .NET 8 introduced a terse syntax to create and initialize a list.
-</p>
 
-<div class="codehead">Program.cs
-  <i class="fas fa-copy copy-icon" onclick="copyCode(this)"></i>
-</div>
-<pre class="code">
-List&lt;string&gt; words = ["forest", "oak", "river", "falcon"];
+```csharp
+List<string> words = ["forest", "oak", "river", "falcon"];
 Console.WriteLine(string.Join(", ", words));
-</pre>
+```
 
-<p>
-The elements of the list are placed inside a pair of square brackets 
-(<code>[]</code>). This syntax is shared by many programming languages. 
-</p>
+The elements of the list are placed inside a pair of square brackets (`[]`). 
+This syntax is shared by many programming languages.
 
+## C# List count elements
 
-<h2>C# List count elements</h2>
+With the `Count` property, we get the number of elements in the list.
 
-<p>
-With the <code>Count</code> property, we get the number of elements in the list.
-</p>
-
-<div class="codehead">Program.cs
-  <i class="fas fa-copy copy-icon" onclick="copyCode(this)"></i>
-</div>
-<pre class="code">
-List&lt;int&gt; vals = [0, 1, 2, 3, 4, 5];
+```csharp
+List<int> vals = [0, 1, 2, 3, 4, 5];
 Console.WriteLine($"There are {vals.Count} elements in the list");
-</pre>
+```
 
-<p>
 The example counts the number of elements in the list.
-</p>
 
-<pre class="explanation">
+```csharp
 Console.WriteLine($"There are {vals.Count} elements in the list");
-</pre>
+```
 
-<p>
 Here we print the number of elements in the List.
-</p>
 
-<pre class="compact">
+```
 $ dotnet run
 There are 6 elements in the list
-</pre>
+```
 
+## C# List access elements
 
-<h2>C# List access elements</h2>
+Elements of a list can be accessed using the index notation `[]`. The index is 
+zero-based.
 
-<p>
-Elements of a list can be accessed using the index notation <code>[]</code>.
-The index is zero-based.
-</p>
-
-<div class="codehead">Program.cs
-  <i class="fas fa-copy copy-icon" onclick="copyCode(this)"></i>
-</div>
-<pre class="code">
-List&lt;int&gt; vals = [0, 1, 2, 3, 4, 5];
+```csharp
+List<int> vals = [0, 1, 2, 3, 4, 5];
 
 Console.WriteLine(vals[0]);
 Console.WriteLine(vals[1]);
@@ -285,55 +130,40 @@ Console.WriteLine(vals.Count - 1);
 
 Console.WriteLine(vals[^1]);
 Console.WriteLine(vals[^2]);
-</pre>
+```
 
-<p>
 The example prints the first, second, and the last element of the list.
-</p>
 
-<pre class="explanation">
+```csharp
 Console.WriteLine(vals.Count - 1);
-</pre>
+```
 
-<p>
-To get the last element of the list, we count the number of elements and divide
+To get the last element of the list, we count the number of elements and divide 
 one.
-</p>
 
-<pre class="explanation">
+```csharp
 Console.WriteLine(vals[^1]);
 Console.WriteLine(vals[^2]);
-</pre>
+```
 
-<p>
-With the <code>^</code> operator, we can access elements from the end of the
-list.
-</p>
+With the `^` operator, we can access elements from the end of the list.
 
-<pre class="compact">
+```
 $ dotnet run
 0
 1
 5
 5
 4
-</pre>
+```
 
+## C# List add elements
 
+The `Add` method adds an element at the end of the list. The `AddRange` methods 
+adds the elements of the specified collection to the end of the list.
 
-<h2>C# List add elements</h2>
-
-<p>
-The <code>Add</code> method adds an element at the end of the list. The
-<code>AddRange</code> methods adds the elements of the specified collection to
-the end of the list.
-</p>
-
-<div class="codehead">Program.cs
-  <i class="fas fa-copy copy-icon" onclick="copyCode(this)"></i>
-</div>
-<pre class="code">
-List&lt;string&gt; words = ["forest", "oak", "river", "falcon"];
+```csharp
+List<string> words = ["forest", "oak", "river", "falcon"];
 
 words.Add("sky");
 words.Add("ocean");
@@ -342,50 +172,37 @@ string[] words2 = ["owl", "hawk"];
 words.AddRange(words2);
 
 Console.WriteLine(string.Join(',', words));
-</pre>
+```
 
-<p>
 The example creates two lists and adds new elements to it.
-</p>
 
-<pre class="explanation">
+```csharp
 words.Add("sky");
 words.Add("ocean");
-</pre>
+```
 
-<p>
-Two elements are added to the list with <code>Add</code>.
-</p>
+Two elements are added to the list with `Add`.
 
-<pre class="explanation">
+```csharp
 string[] words2 = ["owl", "hawk"];
 words.AddRange(words2);
-</pre>
+```
 
-<p>
-With <code>AddRange</code> method, we add another collection to the list.
-</p>
+With `AddRange` method, we add another collection to the list.
 
-<pre class="compact">
+```
 $ dotnet run
 forest,oak,river,falcon,sky,ocean,owl,hawk
-</pre>
+```
 
+## C# List insert elements
 
+The `Insert` method inserts an element into the list at the specified index. 
+The `InsertRange` inserts the elements of a collection into the list at the 
+specified index.
 
-<h2>C# List insert elements</h2>
-
-<p>
-The <code>Insert</code> method inserts an element into the list at the specified
-index. The <code>InsertRange</code> inserts the elements of a collection into
-the list at the specified index.
-</p>
-
-<div class="codehead">Program.cs
-  <i class="fas fa-copy copy-icon" onclick="copyCode(this)"></i>
-</div>
-<pre class="code">
-List&lt;string&gt; words = ["forest", "oak", "river", "falcon"];
+```csharp
+List<string> words = ["forest", "oak", "river", "falcon"];
 
 words.Insert(0, "sky");
 words.Insert(words.Count, "cloud");
