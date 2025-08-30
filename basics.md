@@ -126,8 +126,8 @@ With top-level statements (C# 9), we can further simplify the code.
 We don't need to use the `Main` method as a starting point and the
 code does not have to be placed inside an application class.
 
-**Note: ** Only one file in the application may use top-level
-statements.
+**Only one file in the application may use top-level statements.**
+
 
 For small programs, we can also omit the namespace declaration.
 
