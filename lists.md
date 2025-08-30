@@ -1,7 +1,5 @@
 # C# List
 
-*last modified May 14, 2025*
-
 This article provides a comprehensive guide on working with the `List` 
 collection in C#. Learn how to efficiently store, manage, and manipulate 
 dynamic lists in your applications.
@@ -860,20 +858,4 @@ Console.WriteLine(string.Join(", ", ints));
 This example uses `ConvertAll` to convert a list of strings
 representing numbers into a list of integers. Each string is parsed to an int.
 
-## Source
-
-[List class - language reference](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1?view=net-8.0)
-
-In this article, we explored the functionality of the C# `List` collection, 
-learning how to efficiently store, manage, and manipulate dynamic lists in 
-.NET applications.
-
-## Author
-
-My name is Jan Bodnar, and I am a passionate programmer with extensive 
-programming experience. I have been writing programming articles since 2007. 
-To date, I have authored over 1,400 articles and 8 e-books. I possess more 
-than ten years of experience in teaching programming.
-
-List [all C# tutorials](/csharp/).
 
