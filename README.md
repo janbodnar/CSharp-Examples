@@ -4,16 +4,26 @@ C# Examples
 
 
 ```csharp
+using System.Diagnostics;
+
 Console.WriteLine(Environment.CurrentDirectory); // print current working directory
 
 // Execute shell command
-var result = Process.Start(new ProcessStartInfo("ls", "-la") 
-{ 
-    RedirectStandardOutput = true, 
-    UseShellExecute = false 
+var result = Process.Start(new ProcessStartInfo("ls", "-la")
+{
+    RedirectStandardOutput = true,
+    UseShellExecute = false
 });
-result.WaitForExit();
-Console.WriteLine(result.StandardOutput.ReadToEnd());
+
+if (result != null)
+{
+    result.WaitForExit();
+    Console.WriteLine(result.StandardOutput.ReadToEnd());
+}
+else
+{
+    Console.WriteLine("Failed to start process.");
+}
 ```
 
 ## even/odd  
