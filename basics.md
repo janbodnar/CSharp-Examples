@@ -1,12 +1,6 @@
 # C# basics
 
-In this article we cover basic programming concepts of the C# language. We
-introduce the very basic programs. We work with variables, constants and basic
-data types. We read and write to the console; we mention variable interpolation.
-
-## C# old school example
-
-We start with a traditional C# example.
+A traditional C# example:
 
 ```csharp
 using System;
