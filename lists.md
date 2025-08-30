@@ -228,7 +228,7 @@ In the example, we check if the `oak` word is in the list.
 
 ## C# List removing elements
 
-The `Remove`, `RemoveAt`, `RemoveAll`, `RemoveRange`, and `Clear` methods  
+The `Remove`, `RemoveAt`, `RemoveAll`, `RemoveRange`, and `Clear` methods   
 can be used to remove elements from a list.
 
 ```csharp
@@ -276,9 +276,9 @@ With `RemoveAt`, we remove the element at the given index.
 nums.RemoveRange(0, 3);
 ```
 
-The `RemoveRange` method removes the given range of values from the
-list. The parameters are the zero-based starting index of the range of elements
-to remove and the number of elements to remove.
+The `RemoveRange` method removes the given range of values from the  
+list. The parameters are the zero-based starting index of the range of elements  
+to remove and the number of elements to remove.  
 
 ## C# List ToArray
 
@@ -293,7 +293,7 @@ var nums2 = nums.ToArray();
 Console.WriteLine(nums2.GetType());
 ```
 
-In the example, we create an array from a list. We print the type of both
+In the example, we create an array from a list. We print the type of both  
 containers with `GetType`.
 
 ```
